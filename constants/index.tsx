@@ -61,4 +61,4 @@ export const footerInfos = [
     }
 ];
 
-export const selectSubjects = ['HTML & CSS', 'JavaScript', 'Python', 'React', 'Next', 'Vue', 'AI', 'Java', 'C', 'C++', 'C#', 'Kotlin'];
+export const selectSubjects = ['HTML & CSS', 'JavaScript', 'Python', 'React.js', 'Next.js', 'Vue.js', 'Java', 'C', 'C++', 'C#', 'Spring boot'];

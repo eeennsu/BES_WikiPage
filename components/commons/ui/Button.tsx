@@ -2,12 +2,12 @@ import type { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
 
 type Props = {
     onClick?: () => void;
+    disabled?: boolean;
     type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
     color?: 'BLUE' | 'ORANGE';
-    disabled?: boolean;
 }
 
-const Button: FC<PropsWithChildren<Props>> = ({ onClick, children, type = 'button', color = 'BLUE', disabled }) => {
+const Button: FC<PropsWithChildren<Props>> = ({ onClick, disabled, children, type = 'button', color = 'BLUE' }) => {
 
     const _color = color === 'BLUE'
         ? 'bg-blue-500 hover:bg-blue-500/80 active:bg-blue-600'

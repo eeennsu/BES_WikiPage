@@ -4,19 +4,21 @@ import type { FC } from 'react';
 import { BiSolidBookAdd } from "react-icons/bi";
 import ContentTemplate from '../commons/ContentTemplate';
 import useModal from '@/lib/hooks/useModal';
+import useUserStore from '@/zustand/user/useUserStore';
 
 const AddContent: FC = () => {
 
-    const { isModalOpen, openModal, closeModal } = useModal();
+    const { openModal } = useModal();
+    const isLogin = useUserStore(state => state.isLogin);
     
     const handleModalOpen = () => {
         openModal(<ContentTemplate type='CREATE' />);
     }
 
-    return (
-        <div className='absolute right-2'>
+    return isLogin && (
+        <div>
             <button onClick={handleModalOpen}>
-                <BiSolidBookAdd />        
+                <BiSolidBookAdd className='text-3xl text-blue-600 transition hover:text-blue-500/70'/>        
             </button>
         </div>
     );

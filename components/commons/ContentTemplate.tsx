@@ -1,12 +1,17 @@
 'use client';
 
-import type { FC } from 'react';
+import type { FC, FormEvent } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { selectSubjects } from '@/constants';
 import { MdCheckCircleOutline } from 'react-icons/md';
-import useContentStore from '@/zustand/content/useContentStore';
+import { toast } from 'react-toastify';
+import { createNewContent } from '@/lib/actions/content.action';
+import { usePathname } from 'next/navigation';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import useModal from '@/lib/hooks/useModal';
+import useUserStore from '@/zustand/user/useUserStore';
+import useContentStore from '@/zustand/content/useContentStore';
 import ButtonContent from './ui/ButtonContent';
 
 type Props = {
@@ -15,19 +20,59 @@ type Props = {
 
 const ContentTemplate: FC<Props> = ({ type }) => {
 
-    const {
-        title, setTitle,
-        text, setText
-    } = useContentStore(state => ({
-        title: state.title, setTitle: state.setTitle,
-        text: state.text, setText: state.setText
-    }));
+    const pathname = usePathname();
 
-    const [selectedSubject, setSelectedSubject] = useState<string>(selectSubjects[0]);
+    const userId = useUserStore(state => state.userInfo?._id);
+    
     const { closeModal } = useModal();
 
+    const [inputTitle, setInputTitle] = useState<string>('');
+    const [inputText, setInputText] = useState<string>('');
+    const [selectedSubject, setSelectedSubject] = useState<string>(selectSubjects[0]);
+
+    const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (inputTitle.length === 0 || inputText.length === 0 || selectSubjects.length === 0) {
+            toast.warning('모두 입력해주세요');
+            return;
+        }
+
+        if (!userId) {
+            toast.error('다시 로그인을 진행해주세요');
+            return;
+        }
+
+        try {
+            setIsSubmiting(true);
+
+            if (type === 'CREATE') {
+                await createNewContent({
+                    title: inputTitle,
+                    text: inputText,
+                    subject: selectedSubject,
+                    pathname,
+                    userId
+                });
+    
+                toast.success('새 콘텐츠가 추가되었습니다');                
+            } else {
+                
+            }
+            
+        } catch (error) {
+            console.log(error);
+            toast.error('새 콘텐츠 추가에 실패하였습니다');
+        } finally {
+            setIsSubmiting(false);
+            closeModal();
+        }
+    }
+
     return (
-        <form className='grid min-w-[768px] gap-4 py-6'>
+        <form className='grid min-w-[768px] gap-4 py-6' onSubmit={handleSubmit}>
             <div className='flex flex-col space-y-1'>
                 <label htmlFor='title'>
                     제목
@@ -36,21 +81,21 @@ const ContentTemplate: FC<Props> = ({ type }) => {
                     id='title' 
                     className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none ' 
                     placeholder='제목을 입력해주세요' 
-                    value={title} 
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={inputTitle} 
+                    onChange={(e) => setInputTitle(e.target.value)}
                 />
             </div>
             <div className='flex flex-col mt-4 space-y-1'>
                 <label htmlFor='text'>
-                    게시글
+                    내용
                 </label>
                 <textarea 
                     id='text'
-                    className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none' 
+                    className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll' 
                     rows={6} 
                     placeholder='글을 입력해주세요' 
-                    value={text} 
-                    onChange={(e) => setText(e.target.value)}
+                    value={inputText} 
+                    onChange={(e) => setInputText(e.target.value)}
                 />
             </div>
             <div className='relative flex flex-col items-start mt-4 space-y-1'>
@@ -75,7 +120,7 @@ const ContentTemplate: FC<Props> = ({ type }) => {
                     >
                         <Listbox.Options 
                             id='subject' 
-                            className='w-full overflow-y-auto rounded-md shadow-sm min-w-36 max-h-44 custom-scroll'
+                            className='w-full overflow-y-auto rounded-md shadow-sm min-w-36 max-h-[200px] custom-scroll'
                         >
                             {
                                 selectSubjects.map((subject) => (
@@ -102,20 +147,27 @@ const ContentTemplate: FC<Props> = ({ type }) => {
                 </Listbox>
             </div>
             <div className='flex justify-center gap-5 mt-4'>
-                <ButtonContent                     
-                    onClick={() => {}} 
-                    type='submit'                
+                <ButtonContent 
+                    className='w-[88px]'
+                    type='submit'
+                    disabled={isSubmiting}
                 >
                     {
-                        type === 'CREATE' 
+                        isSubmiting ? (
+                            <AiOutlineLoading3Quarters className='text-xl text-white animate-spin' />     
+                        ) : (
+                            type === 'CREATE' 
                             ? '추가하기'
                             : '수정하기'
+                        )
                     }
                 </ButtonContent>
          
                 <ButtonContent 
+                    type='button'
                     onClick={closeModal} 
                     color='RED'
+                    disabled={isSubmiting}
                 >
                     뒤로가기
                 </ButtonContent>         

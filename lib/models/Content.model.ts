@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const contentSchema = new Schema({
+const ContentSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -23,6 +23,8 @@ const contentSchema = new Schema({
     },
 });
 
-const ContentModel = models.Content || model('Content', contentSchema);
+ContentSchema.set('timestamps', true);
+
+const ContentModel = models.Content || model('Content', ContentSchema);
 
 export default ContentModel;

@@ -1,29 +1,25 @@
 import type { NextPage } from 'next';
 import AddContent from '@/components/home/AddContent';
-import ContentItem from '@/components/home/ContentItem';
 import Pagination from '@/components/home/Pagination';
-import Link from 'next/link';
+import Contents from '@/components/home/Contents';
 
-const MainPage: NextPage = async () => {
+type Props = {
+    searchParams: {
+        [key: string]: string | undefined;
+    }
+}
 
-    const data = (await fetch('http://localhost:3500/data').then(res => res.json())) as Content[]; 
- 
+const MainPage: NextPage<Props> = async ({ searchParams }) => {
+
     return (
-        <div className='flex flex-col justify-center h-full py-4'>          
-            <section className='flex flex-col gap-6 p-8 mt-6'>
-                {
-                    data.map((content) => (
-                        <Link key={content.id} href={`/contents/${content.id}`}>
-                            <ContentItem content={content} />
-                        </Link>
-                    ))
-                }
-            </section>     
-                 
-            <section className='relative flex justify-center w-full'>
-                <Pagination />
+        <div className='flex flex-col justify-center h-full py-4'>         
+            <section className='flex justify-end mt-6 px-7'>
                 <AddContent />
-            </section>              
+            </section> 
+            
+            <section className='flex flex-col gap-6 p-8 pt-2'>
+                <Contents page={searchParams?.page} />                
+            </section>                     
         </div>
     );
 };
