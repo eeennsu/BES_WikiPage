@@ -5,8 +5,8 @@ import Link from 'next/link';
 const Footer: FC = () => {
 
     return (
-        <footer className='flex justify-center bg-slate-200'>
-            <div className='flex justify-center w-full max-w-5xl gap-24 px-10 py-4 sm:px-6'>
+        <footer className='flex justify-center py-6 bg-slate-100'>
+            <div className='flex justify-center w-full max-w-5xl gap-24 px-10 sm:px-6'>
                 <div className='flex items-center'>
                     <ul className='flex flex-col gap-1 text-sm'>
                         {

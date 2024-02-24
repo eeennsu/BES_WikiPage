@@ -1,21 +1,21 @@
 import type { NextPage } from 'next';
-import { dummy } from '@/constants/dummy';
 import AddContent from '@/components/home/AddContent';
 import ContentItem from '@/components/home/ContentItem';
 import Pagination from '@/components/home/Pagination';
+import Link from 'next/link';
 
-const MainPage: NextPage = () => {
+const MainPage: NextPage = async () => {
 
+    const data = (await fetch('http://localhost:3500/data').then(res => res.json())) as Content[]; 
+ 
     return (
         <div className='flex flex-col justify-center h-full py-4'>          
-            <h2 className='text-3xl text-center'>
-                Wikies
-            </h2>  
-
-            <section className='flex flex-col gap-6 p-3 rounded-md bg-slate-100'>
+            <section className='flex flex-col gap-6 p-8 mt-6'>
                 {
-                    dummy.map((content) => (
-                        <ContentItem content={content} />
+                    data.map((content) => (
+                        <Link key={content.id} href={`/contents/${content.id}`}>
+                            <ContentItem content={content} />
+                        </Link>
                     ))
                 }
             </section>     

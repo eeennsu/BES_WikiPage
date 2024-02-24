@@ -2,21 +2,24 @@
 
 import type { FC } from 'react';
 import { BiSolidBookAdd } from "react-icons/bi";
-import useModalStore from '@/zustand/modal/useModalStore';
-import ContentTemplate from './ContentTemplate';
-import Modal from '../commons/Modal';
+import ContentTemplate from '../commons/ContentTemplate';
+import useModal from '@/lib/hooks/useModal';
 
 const AddContent: FC = () => {
 
-    const setIsModalOpen = useModalStore(state => state.setIsModalOpen);
+    const { isModalOpen, openModal, closeModal } = useModal();
+    
+    const handleModalOpen = () => {
+        openModal({ 
+            modalTitle: '강의 추가',
+            modalContent: <ContentTemplate type='CREATE' />
+        });
+    }
 
     return (
         <div className='absolute right-2'>
-            <button onClick={() => setIsModalOpen(true)}>
-                <BiSolidBookAdd />
-                <Modal modalTitle='강의 추가하기' submitText='추가하기'>
-                    <ContentTemplate />
-                </Modal>
+            <button onClick={handleModalOpen}>
+                <BiSolidBookAdd />        
             </button>
         </div>
     );

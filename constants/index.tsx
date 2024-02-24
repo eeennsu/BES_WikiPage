@@ -3,12 +3,6 @@ import { FcHome, FcPhone, FcPrint  } from "react-icons/fc";
 
 export const snsLinks = [
     {
-        name: 'Facebook',
-        color: 'text-blue-500',
-        icon: <FaFacebook />,
-        url: '/'
-    },
-    {
         name: 'X',
         color: 'text-black',
         icon: <FaXTwitter />,
@@ -24,6 +18,12 @@ export const snsLinks = [
         name: 'Youtube',
         color: 'text-red-600',
         icon: <FaYoutube />,
+        url: '/'
+    },
+    {
+        name: 'Facebook',
+        color: 'text-blue-700',
+        icon: <FaFacebook />,
         url: '/'
     }
 ];
@@ -59,4 +59,6 @@ export const footerInfos = [
         value: '(02) 2222-2222',
         icon: <FcPrint />
     }
-]
+];
+
+export const selectSubjects = ['HTML & CSS', 'JavaScript', 'Python', 'React', 'Next', 'Vue', 'AI', 'Java', 'C', 'C++', 'C#', 'Kotlin'];
