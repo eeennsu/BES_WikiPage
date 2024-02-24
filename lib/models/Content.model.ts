@@ -6,11 +6,21 @@ const contentSchema = new Schema({
         required: true,
         ref: 'User'
     },
-    title: String,
-    text: String,
-    image: String,
-    lector: String,
-    subject: String,
+
+    title: {
+        type: String,
+        required: true,
+    },
+
+    text: {
+        type: String,
+        required: true,
+    },
+    
+    subject: {
+        type: String,
+        required: true,
+    },
 });
 
 const ContentModel = models.Content || model('Content', contentSchema);

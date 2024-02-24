@@ -8,9 +8,6 @@ const useModalStore = createWithEqualityFn<UseModalStoreType>()(
             isModalOpen: false,
             setIsModalOpen: (trigger) => set(() => ({ isModalOpen: trigger }), false, 'SET_IS_MODAL_OEPN'),
 
-            modalTitle: '',
-            setModalTitle: (title: string) => set(() => ({ modalTitle: title }), false, 'SET_MODAL_TITLE'),
-
             modalContent: null,
             setModalContent: (content: React.ReactNode) => set(() => ({ modalContent: content }), false, 'SET_MODAL_CONTENT'),
         })

@@ -27,8 +27,8 @@ export const updateContent = ({
     try {
         // await
     } catch (error) {
-            console.log(error);
-            throw new Error(`Faied to update content. error - ${(error as Error).message}`);
+        console.log(error);
+        throw new Error(`Faied to update content. error - ${(error as Error).message}`);
     }
 }
 

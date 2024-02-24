@@ -7,7 +7,7 @@ import useModal from '@/lib/hooks/useModal';
 
 const Modal: FC = () => {
 
-    const { closeModal, isModalOpen, modalTitle, modalContent } = useModal();
+    const { closeModal, isModalOpen, modalContent } = useModal();
 
     return (
         <Transition

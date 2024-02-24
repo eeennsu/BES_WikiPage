@@ -10,10 +10,7 @@ const AddContent: FC = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     
     const handleModalOpen = () => {
-        openModal({ 
-            modalTitle: '강의 추가',
-            modalContent: <ContentTemplate type='CREATE' />
-        });
+        openModal(<ContentTemplate type='CREATE' />);
     }
 
     return (

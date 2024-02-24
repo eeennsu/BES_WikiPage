@@ -1,10 +1,13 @@
 import type { NextPage, Metadata } from 'next';
-import { Suspense, type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import { Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Gothic_A1 } from "next/font/google";
 import Footer from '@/components/layouts/Footer';
 import Header from '@/components/layouts/Header';
 import Modal from '@/components/commons/ui/Modal';
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Gothic_A1({ weight: '500', subsets: ['latin'] });
 
@@ -30,6 +33,12 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
                     </div>
                     <Footer />
                     <Modal />
+                    <ToastContainer 
+                        position='top-center' 
+                        hideProgressBar 
+                        style={{ width: 'fit-content', fontSize: 14 }} 
+                        autoClose={3000}
+                    />
                 </div>                                 
             </body>
         </html>

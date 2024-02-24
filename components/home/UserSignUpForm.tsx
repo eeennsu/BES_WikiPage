@@ -5,17 +5,18 @@ import { useState } from 'react';
 import { UserForm, UserFormSchema } from '@/lib/validation/user.validation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Button from './ui/Button';
-import useModal from '@/lib/hooks/useModal';
 import { userLogin, userSignUp } from '@/lib/actions/user.action';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { toast } from 'react-toastify';
+import useModal from '@/lib/hooks/useModal';
+import Button from '../commons/ui/Button';
+import useUserStore from '@/zustand/user/useUserStore';
 
-type Props = {
-    type: 'SIGN_UP' | 'LOGIN'
-}
-
-const UserFormTemplate: FC<Props> = ({ type }) => {
+const UserSignUpForm: FC = () => {
 
     const { closeModal } = useModal();
+    const setIsLogin = useUserStore(state => state.setIsLogin);
+    const setUserInfo = useUserStore(state => state.setUserInfo);
 
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
@@ -23,26 +24,27 @@ const UserFormTemplate: FC<Props> = ({ type }) => {
         resolver: zodResolver(UserFormSchema),
         defaultValues: {
             email: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         }
     });
 
-    const handleRegister = async (isSignUp: boolean) => {
+    const handleSignUp = async () => {
         const { email, password } = getValues();
 
         setIsSubmiting(true);
 
         try {
-            if (isSignUp) {
-                await userSignUp({
-                    email,
-                    password
-                });
+            const response = await userSignUp({
+                email,
+                password
+            });
+
+            if (response) {
+                toast.success('회원가입에 성공하였습니다');              
+                closeModal();
             } else {
-                await userLogin({
-                    email,
-                    password
-                });
+                toast.error('이미 존재하는 아이디이거나 알 수 없는 이유로 회원가입에 실패하였습니다.');
             }
 
         } catch(err) {
@@ -51,23 +53,15 @@ const UserFormTemplate: FC<Props> = ({ type }) => {
             setIsSubmiting(false);
         }
     }
-    
-    const handleLogin = () => {
-        
-    }
 
     return (
         <>
             <h3 className='p-3 text-xl font-semibold leading-6 text-center text-gray-900'> 
-                {
-                    type === 'SIGN_UP' 
-                        ? 'Sign Up'
-                        : 'Login'
-                }
+                Sign Up
             </h3>
             <form 
                 className='mx-auto border rounded-lg shadow-sm min-w-[360px] mt-4' 
-                onSubmit={handleSubmit(() => handleRegister(type === 'SIGN_UP'))}
+                onSubmit={handleSubmit(handleSignUp)}
             >     
                 <div className='p-8'>
                 
@@ -145,11 +139,11 @@ const UserFormTemplate: FC<Props> = ({ type }) => {
 
                         <div className='flex w-full gap-4'>
                             <div className='flex-[0.7]'>
-                                <Button type='submit'>
+                                <Button type='submit' disabled={isSubmiting}>
                                     {
-                                        type === 'SIGN_UP' 
-                                            ? '회원가입'
-                                            : '로그인'
+                                        isSubmiting ? (
+                                            <AiOutlineLoading3Quarters className='text-xl animate-spin' />                                        
+                                        ) : '회원가입'
                                     }
                                 </Button>
                             </div>     
@@ -157,6 +151,7 @@ const UserFormTemplate: FC<Props> = ({ type }) => {
                                 <Button 
                                     onClick={closeModal} 
                                     color='ORANGE'
+                                    disabled={isSubmiting}
                                 >
                                     뒤로가기
                                 </Button>
@@ -169,7 +164,7 @@ const UserFormTemplate: FC<Props> = ({ type }) => {
     );
 }
 
-export default UserFormTemplate;
+export default UserSignUpForm;
 
 
 

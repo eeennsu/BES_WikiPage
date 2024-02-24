@@ -7,11 +7,9 @@ import useModalStore from '@/zustand/modal/useModalStore';
 const useModal = () => {
     const { 
         isModalOpen, setIsModalOpen,
-        modalTitle, setModalTitle, 
         modalContent, setModalContent
     } = useModalStore(state => ({
         isModalOpen: state.isModalOpen, setIsModalOpen: state.setIsModalOpen,
-        modalTitle: state.modalTitle, setModalTitle: state.setModalTitle, 
         modalContent: state.modalContent, setModalContent: state.setModalContent
     }), shallow);
 
@@ -21,15 +19,14 @@ const useModal = () => {
     );
   
     const openModal = useCallback(
-        ({ modalTitle, modalContent }: Pick<UseModalStoreType, 'modalTitle' | 'modalContent'>) => {
+        (modalContent: React.ReactNode) => {
             setIsModalOpen(true),
-            setModalTitle(modalTitle),
             setModalContent(modalContent);
         },
         [setIsModalOpen]
     );
   
-    return { isModalOpen, closeModal, openModal, modalTitle, modalContent };
+    return { isModalOpen, closeModal, openModal, modalContent };
 };
 
 export default useModal;
