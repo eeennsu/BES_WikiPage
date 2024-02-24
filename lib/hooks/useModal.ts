@@ -14,8 +14,14 @@ const useModal = () => {
         modalContent: state.modalContent, setModalContent: state.setModalContent
     }), shallow);
 
+    const initForm = useContentStore(state => state.initForm);
+    const getIsFormWritten = useContentStore(state => state.getIsFormWritten);
+
     const closeModal = useCallback(
-        () => setIsModalOpen(false), 
+        () => {
+            setIsModalOpen(false)
+            getIsFormWritten() && initForm();        // 폼 내용이 써져있을 때만 초기화
+        }, 
         [setIsModalOpen]
     );
   

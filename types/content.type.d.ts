@@ -1,8 +1,9 @@
 type Content = {
-    id: string;
+    _id: string;
+    author: string;
     title: string;
     text: string;
     subject: string;
-    image: string;
-    lector: string;
+    teacher: string;
+    createdAt: string;
 }

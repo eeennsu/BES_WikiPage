@@ -6,9 +6,10 @@ import { Fragment, useState } from 'react';
 import { selectSubjects } from '@/constants';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import { createNewContent } from '@/lib/actions/content.action';
+import { createNewContent, updateContent } from '@/lib/actions/content.action';
 import { usePathname } from 'next/navigation';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { shallow } from 'zustand/shallow';
 import useModal from '@/lib/hooks/useModal';
 import useUserStore from '@/zustand/user/useUserStore';
 import useContentStore from '@/zustand/content/useContentStore';
@@ -16,9 +17,10 @@ import ButtonContent from './ui/ButtonContent';
 
 type Props = {
     type: 'CREATE' | 'UPDATE'
+    contentId?: string;
 }
 
-const ContentTemplate: FC<Props> = ({ type }) => {
+const ContentTemplate: FC<Props> = ({ type, contentId }) => {
 
     const pathname = usePathname();
 
@@ -26,17 +28,25 @@ const ContentTemplate: FC<Props> = ({ type }) => {
     
     const { closeModal } = useModal();
 
-    const [inputTitle, setInputTitle] = useState<string>('');
-    const [inputText, setInputText] = useState<string>('');
-    const [selectedSubject, setSelectedSubject] = useState<string>(selectSubjects[0]);
+    const {
+        title, setTitle,
+        text, setText,
+        selectedSubject, setSelectedSubject,
+        teacher, setTeacher,
+    } = useContentStore(state => ({
+        title: state.title, setTitle: state.setTitle,
+        text: state.text, setText: state.setText,
+        selectedSubject: state.selectedSubject, setSelectedSubject: state.setSelectedSubject,
+        teacher: state.teacher, setTeacher: state.setTeacher,
+    }), shallow);
 
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (inputTitle.length === 0 || inputText.length === 0 || selectSubjects.length === 0) {
-            toast.warning('모두 입력해주세요');
+        if (title === '' || text === '' || selectedSubject === '' || teacher === '') {
+            toast.warning('강의 정보를 모두 입력해주세요');
             return;
         }
 
@@ -50,16 +60,27 @@ const ContentTemplate: FC<Props> = ({ type }) => {
 
             if (type === 'CREATE') {
                 await createNewContent({
-                    title: inputTitle,
-                    text: inputText,
+                    title,
+                    text,
                     subject: selectedSubject,
+                    teacher,
                     pathname,
                     userId
                 });
     
-                toast.success('새 콘텐츠가 추가되었습니다');                
+                toast.success('새 콘텐츠가 추가되었습니다');  
+                              
             } else {
-                
+                await updateContent({
+                    contentId: contentId as string,
+                    title,
+                    text,
+                    subject: selectedSubject,
+                    teacher,
+                    pathname
+                });
+
+                toast.success('수정되었습니다');
             }
             
         } catch (error) {
@@ -67,7 +88,7 @@ const ContentTemplate: FC<Props> = ({ type }) => {
             toast.error('새 콘텐츠 추가에 실패하였습니다');
         } finally {
             setIsSubmiting(false);
-            closeModal();
+            closeModal();        
         }
     }
 
@@ -81,8 +102,8 @@ const ContentTemplate: FC<Props> = ({ type }) => {
                     id='title' 
                     className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none ' 
                     placeholder='제목을 입력해주세요' 
-                    value={inputTitle} 
-                    onChange={(e) => setInputTitle(e.target.value)}
+                    value={title} 
+                    onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
             <div className='flex flex-col mt-4 space-y-1'>
@@ -94,57 +115,71 @@ const ContentTemplate: FC<Props> = ({ type }) => {
                     className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll' 
                     rows={6} 
                     placeholder='글을 입력해주세요' 
-                    value={inputText} 
-                    onChange={(e) => setInputText(e.target.value)}
+                    value={text} 
+                    onChange={(e) => setText(e.target.value)}
                 />
             </div>
-            <div className='relative flex flex-col items-start mt-4 space-y-1'>
-                <Listbox 
-                    value={selectedSubject} 
-                    onChange={setSelectedSubject}                    
-                >
-                    <Listbox.Label htmlFor='subject'>
-                        주제
-                    </Listbox.Label>
-                    <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
-                        {selectedSubject}                    
-                    </Listbox.Button>
-                    <Transition
-                        enter='transition duration-100 ease-out'
-                        enterFrom='transform scale-95 opacity-0'
-                        enterTo='transform scale-100 opacity-100'
-                        leave='transition duration-75 ease-out'
-                        leaveFrom='transform scale-100 opacity-100'
-                        leaveTo='transform scale-95 opacity-0'
-                        className='absolute w-full top-16'
+            <div className='flex items-center gap-6 mt-4'>
+                <div className='relative flex flex-col items-start flex-1 space-y-1'>
+                    <Listbox 
+                        value={selectedSubject} 
+                        onChange={setSelectedSubject}                    
                     >
-                        <Listbox.Options 
-                            id='subject' 
-                            className='w-full overflow-y-auto rounded-md shadow-sm min-w-36 max-h-[200px] custom-scroll'
+                        <Listbox.Label htmlFor='subject'>
+                            주제
+                        </Listbox.Label>
+                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
+                            {selectedSubject}                    
+                        </Listbox.Button>
+                        <Transition
+                            enter='transition duration-100 ease-out'
+                            enterFrom='transform scale-95 opacity-0'
+                            enterTo='transform scale-100 opacity-100'
+                            leave='transition duration-75 ease-out'
+                            leaveFrom='transform scale-100 opacity-100'
+                            leaveTo='transform scale-95 opacity-0'
+                            className='absolute w-full top-16'
                         >
-                            {
-                                selectSubjects.map((subject) => (
-                                    <Listbox.Option                                    
-                                        key={subject}
-                                        value={subject}     
-                                        as={Fragment}     
-                                    >
-                                        {
-                                            ({ active, selected }) => (
-                                                <li className={`flex items-center gap-1 p-2 pl-4 cursor-pointer shadow-md ${
-                                                    active ? 'bg-blue-400 text-white' : 'bg-slate-200 text-black'
-                                                }`}>
-                                                    {selected && <MdCheckCircleOutline />}
-                                                    {subject}
-                                                </li>
-                                            )
-                                        }
-                                    </Listbox.Option>
-                                ))
-                            }
-                        </Listbox.Options>
-                    </Transition>
-                </Listbox>
+                            <Listbox.Options 
+                                id='subject' 
+                                className='w-full overflow-y-auto rounded-md shadow-sm min-w-36 max-h-[200px] custom-scroll'
+                            >
+                                {
+                                    selectSubjects.map((subject) => (
+                                        <Listbox.Option                                    
+                                            key={subject}
+                                            value={subject}     
+                                            as={Fragment}     
+                                        >
+                                            {
+                                                ({ active, selected }) => (
+                                                    <li className={`flex items-center gap-1 p-2 pl-4 cursor-pointer shadow-md ${
+                                                        active ? 'bg-blue-400 text-white' : 'bg-slate-200 text-black'
+                                                    }`}>
+                                                        {selected && <MdCheckCircleOutline />}
+                                                        {subject}
+                                                    </li>
+                                                )
+                                            }
+                                        </Listbox.Option>
+                                    ))
+                                }
+                            </Listbox.Options>
+                        </Transition>
+                    </Listbox>                
+                </div>           
+                <div className='flex flex-col space-y-1'>
+                    <label htmlFor='teacher'>
+                        강사
+                    </label>
+                    <input 
+                        id='teacher' 
+                        className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none ' 
+                        placeholder='강사를 입력해주세요' 
+                        value={teacher} 
+                        onChange={(e) => setTeacher(e.target.value)}
+                    />
+                </div>
             </div>
             <div className='flex justify-center gap-5 mt-4'>
                 <ButtonContent 

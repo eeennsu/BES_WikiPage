@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { getContents } from '@/lib/actions/content.action';
-import Link from 'next/link';
 import ContentItem from './ContentItem';
 import Pagination from './Pagination';
 
@@ -16,10 +15,11 @@ const Contents: FC<Props> = async ({ page }) => {
     return (
         <>
             {        
-                contents.map((content) => (
-                    <Link key={content.id} href={`/contents/${content.id}`}>
-                        <ContentItem content={content} />
-                    </Link>
+                contents.map((content) => (                  
+                    <ContentItem
+                        key={content._id} 
+                        content={content}
+                    />                 
                 ))            
             }
 

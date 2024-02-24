@@ -21,6 +21,11 @@ const ContentSchema = new Schema({
         type: String,
         required: true,
     },
+
+    teacher: {
+        type: String,
+        required: true
+    }
 });
 
 ContentSchema.set('timestamps', true);

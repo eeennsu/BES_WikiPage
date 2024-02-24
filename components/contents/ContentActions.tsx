@@ -2,46 +2,93 @@
 
 import type { FC } from 'react';
 import { MdOutlineEditNote, MdDeleteOutline } from "react-icons/md";
-import Modal from '../commons/ui/Modal';
+import { shallow } from 'zustand/shallow';
+import { deleteOneContent } from '@/lib/actions/content.action';
+import { useState } from 'react';
 import ContentTemplate from '../commons/ContentTemplate';
-import useModalStore from '@/zustand/modal/useModalStore';
 import useContentStore from '@/zustand/content/useContentStore';
+import useModal from '@/lib/hooks/useModal';
+import useUserStore from '@/zustand/user/useUserStore';
+import { toast } from 'react-toastify';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { useRouter } from 'next/navigation';
 
 type Props = {
-    content: Content;
+    contentId: string;
+    authorId: string;
+    title: string;
+    text: string;
+    subject: string;
+    teacher: string;
 }
 
-const ContentActions: FC<Props> = ({ content }) => {
+const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, teacher }) => {
     
-    const setIsModalOpen = useModalStore(state => state.setIsModalOpen);
-    const setText = useContentStore(state => state.setText);
-    const setTitle = useContentStore(state => state.setTitle);
+    const rotuer = useRouter();
+
+    const { openModal } = useModal();
+    const {
+        setTitle, setText,
+        setSelectedSubject, setTeacher
+    } = useContentStore(state => ({
+        setTitle: state.setTitle, setText: state.setText,
+        setSelectedSubject: state.setSelectedSubject, setTeacher: state.setTeacher
+    }), shallow);
+
+    const curUserId = useUserStore(state => state.userInfo?._id);
+    const isAuhor = curUserId === authorId;
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleUpdate = () => {
-        setTitle(content.title);
-        setText(content.text);
-        setIsModalOpen(true);
+        openModal(<ContentTemplate type='UPDATE' contentId={contentId} />);
+        setTitle(title);
+        setText(text);
+        setSelectedSubject(subject);
+        setTeacher(teacher);
     }
 
-    const handleDelete = () => {
-
+    const handleDelete = async () => {
+        try {
+            setIsLoading(true);
+            
+            await deleteOneContent(contentId);
+            toast.success('삭제에 성공하였습니다');
+            
+        } catch (error) {
+            toast.error('알 수 없는 이유로 삭제에 실패하였습니다');
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+            rotuer.push('/');
+        }
     }
 
+    // 현재 로그인한 유저 === 글 작성자가 같을 때만, 수정과 삭제가 보이도록
     return (
-        <div className='flex gap-4'>             
-            <button 
-                className='p-2 transition bg-blue-300 rounded-full shadow-sm hover:bg-blue-400'
-                onClick={handleUpdate}
-            >
-                <MdOutlineEditNote />
-            </button>
-            <button 
-                className='p-2 text-white transition bg-red-500 rounded-full shadow-sm hover:text-red-500 hover:bg-white'
-                onClick={handleDelete}
-            >
-                <MdDeleteOutline />
-            </button>
-        </div>
+        isAuhor && (
+            <div className='flex gap-3 h-fit'>             
+                <button 
+                    className='p-1.5 text-white text-xl transition bg-blue-400 border-2 border-blue-400 rounded-full shadow-sm hover:bg-blue-300 hover:border-blue-300'
+                    onClick={handleUpdate}
+                >
+                    <MdOutlineEditNote />
+                </button>
+                <button 
+                    className='p-1.5 text-white text-xl transition bg-red-500 border-2 border-red-500 rounded-full shadow-sm hover:text-red-500 hover:bg-white disabled:brightness-200'
+                    onClick={handleDelete}
+                    disabled={isLoading}
+                >
+                    {
+                        isLoading ? (
+                            <AiOutlineLoading3Quarters className='text-white text-md animate-spin' />   
+                        ) : (
+                            <MdDeleteOutline />
+                        )
+                    }
+                </button>
+            </div>
+        )        
     );
 }
 

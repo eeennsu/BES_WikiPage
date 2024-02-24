@@ -10,12 +10,14 @@ export const createNewContent = async ({
     title,
     text,
     subject,
+    teacher,
     pathname,
 }: {
     userId: string;
     title: string;
     text: string;
     subject: string;
+    teacher: string;
     pathname: string;
 }) => {
     try {
@@ -25,7 +27,8 @@ export const createNewContent = async ({
             author: userId,
             title,
             text,
-            subject
+            subject,
+            teacher
         });
 
         if (!content) {
@@ -45,32 +48,37 @@ export const createNewContent = async ({
 }
 
 export const updateContent = async ({ 
-    _id,
+    contentId,
     title,
-    text
+    text,
+    subject,
+    teacher,
+    pathname
 }: {
-    _id: string;
+    contentId: string;
     title: string;
     text: string;
+    subject: string;
+    teacher: string;
+    pathname: string;
 }) => {
     try {
         connectToDB();
+
+        const exists = await ContentModel.findById(contentId);
+
+        exists.title = title;
+        exists.text = text;
+        exists.subject = subject;
+        exists.teacher = teacher;
+
+        await exists.save();
+
+        revalidatePath(pathname);
+
     } catch (error) {
         console.log(error);
         throw new Error(`Faied to update content. error - ${(error as Error).message}`);
-    }
-}
-
-export const deleteContent = async ({
-    _id
-}: {
-    _id: string;
-}) => {
-    try {
-        connectToDB();
-    } catch (error) {
-        console.log(error);
-        throw new Error(`Faied to delete content. error - ${(error as Error).message}`);
     }
 }
 
@@ -85,14 +93,14 @@ export const getContents = async (curPage: number) => {
             .sort({ createdAt: 'desc' })
             .skip(skipAmount)
             .limit(pageSize)
-            .select(['title', 'subject']);
+            .select(['title', 'subject', 'teacher']);
 
         const contents = (await query.exec()) as Content[];
         const totalContents = await ContentModel.countDocuments();
 
         const totalPages = Math.ceil(totalContents / pageSize);
         const hasNext = totalPages > skipAmount + contents.length;
-
+  
         return {
             contents,
             hasNext,
@@ -105,15 +113,61 @@ export const getContents = async (curPage: number) => {
     }
 }
 
-export const getDetailContent = async ({ 
-    _id 
-} : {
-    _id: string;
-}) => {
+export const getDetailContent = async (contentId: string) => {
     try {
         connectToDB();
+
+        const content = (await ContentModel.findById(contentId)) as Content;
+    
+        if (!content) {
+            return null;
+        }
+     
+        return content;
+
     } catch (error) {
         console.log(error);
         throw new Error(`Faied to get detail content. error - ${(error as Error).message}`);
+    }
+}
+
+export const deleteOneContent = async (contentId: string) => {
+    try {
+        connectToDB();
+
+        const content = (await ContentModel.deleteOne({ _id: contentId }));
+
+        return Boolean(content);
+
+    } catch (error) {
+        console.log(error);
+        throw new Error(`Faied to get delete content. error - ${(error as Error).message}`);
+    }
+}
+
+export const getRelatedContents = async ({
+    contentId,
+    subject
+} : {
+    contentId: string;
+    subject: string;
+}) => {
+    try {
+        connectToDB();
+
+        const relatedContents = await ContentModel.find({ 
+            _id: { $ne: contentId },
+            subject
+        }).select(['title', 'teacher']);
+        
+        if (!relatedContents) {
+            return null;
+        } 
+
+        return relatedContents as Content[];
+
+    } catch (error) {
+        console.log(error);
+        throw new Error(`Faied to get realted contents. error - ${(error as Error).message}`);
     }
 }

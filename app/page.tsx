@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import AddContent from '@/components/home/AddContent';
-import Pagination from '@/components/home/Pagination';
 import Contents from '@/components/home/Contents';
 
 type Props = {
