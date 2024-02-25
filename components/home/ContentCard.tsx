@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import { FaExternalLinkAlt } from "react-icons/fa";
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,7 +9,7 @@ type Props = {
 const ContentCard: FC<Props> = ({ content }) => {
 
     return (
-        <div className='relative flex flex-col items-center w-full h-full bg-white rounded-md drop-shadow-md group'>
+        <div className='flex flex-col items-center w-full h-full bg-white rounded-md drop-shadow-md'>
             <figure className='relative flex w-full h-[120px] overflow-hidden'>
                 <Image 
                     src={'https://picsum.photos/seed/picsum/230/120'}
@@ -41,11 +40,7 @@ const ContentCard: FC<Props> = ({ content }) => {
                 <p className='mt-0.5 text-xs text-gray-700 sm:text-sm'>
                 
                 </p>
-            </div>
-            
-            <div className='absolute hidden text-2xl group-hover:block animate-ping bottom-6 right-6'>
-                <FaExternalLinkAlt />
-            </div>
+            </div>         
         </div>
     );
 }

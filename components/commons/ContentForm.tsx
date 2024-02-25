@@ -130,7 +130,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         <Listbox.Label htmlFor='subject'>
                             주제
                         </Listbox.Label>
-                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
+                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2  focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
                             {selectedSubject}                    
                         </Listbox.Button>
                         <Transition
@@ -156,7 +156,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                                             {
                                                 ({ active, selected }) => (
                                                     <li className={`flex items-center gap-1 p-2 pl-4 cursor-pointer shadow-md ${
-                                                        active ? 'bg-blue-400 text-white' : 'bg-slate-200 text-black'
+                                                        active ? 'bg-blue-400 text-white' : 'bg-white text-black'
                                                     }`}>
                                                         {selected && <MdCheckCircleOutline />}
                                                         {subject}

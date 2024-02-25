@@ -24,8 +24,7 @@ const RelatedContents: FC<Props> = async ({ contentId, subject }) => {
                             key={content._id}
                             href={`/contents/${content._id}`}
                         >
-                            <RelatedContentCard      
-                                contentId={contentId}                          
+                            <RelatedContentCard                              
                                 title={content.title}
                                 teacher={content.teacher}
                             />

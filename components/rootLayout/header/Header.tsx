@@ -25,7 +25,7 @@ const Header: FC = () => {
 
                 <div className='flex items-center justify-between gap-9'>
                     <nav className='max-sm:hidden'>
-                        <ul className='flex items-center gap-7 nav-effect'>
+                        <ul className='flex items-center gap-7 custom-nav'>
                             {
                                 headerNav.map((nav) => (
                                     <NavItem

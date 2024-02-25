@@ -13,7 +13,10 @@ type Props = {
 const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
     
     const content = (await getDetailContent(_id)) as Content;
-    
+    await (new Promise((res) => setTimeout(res, 3000)));
+
+    if (!content) throw new Error('Not founded this content');
+
     return (
         <article className='w-full pb-10 mt-6 sm:mt-10'>
             <section>

@@ -64,16 +64,13 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
 
     return (
         <>
-            {
-                curPage !== startPage && (
-                    <button 
-                        onClick={() => handleNavigation('PREV')} 
-                        disabled={curPage === 1}
-                    >
-                        <RiArrowLeftSLine className='text-2xl' />
-                    </button>
-                )
-            }
+            <button 
+                onClick={() => handleNavigation('PREV')} 
+                disabled={curPage === 1}
+                className={`${curPage === startPage && 'invisible'}`}
+            >
+                <RiArrowLeftSLine className='text-2xl' />
+            </button>  
 
             <div className='flex gap-2 mx-4'>
                 {
@@ -93,16 +90,13 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                 }
             </div>
 
-            {
-                curPage !== endPage && (
-                    <button
-                        onClick={() => handleNavigation('NEXT')}
-                        disabled={curPage === totalPages}
-                    >
-                        <RiArrowRightSLine className='text-2xl' />
-                    </button>
-                )
-            }
+            <button
+                onClick={() => handleNavigation('NEXT')}
+                disabled={curPage === totalPages}
+                className={`${curPage === endPage && 'invisible'}`}
+            >
+                <RiArrowRightSLine className='text-2xl' />
+            </button>
         </>
     );
 }

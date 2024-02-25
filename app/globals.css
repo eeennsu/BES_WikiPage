@@ -14,6 +14,7 @@
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
+/* 커스텀한 스크롤 스타일 (listbox에 적용) */
 .custom-scroll::-webkit-scrollbar {
     width: 10px;
     height: 5px;
@@ -29,7 +30,8 @@
     border-bottom-right-radius: 4px;
 }
 
-.nav-effect li {
+/* 커스텀한 nav스타일 (header nav에 적용) */
+.custom-nav li {
     color: #686de0;
     text-shadow: none;
     padding: 6px 0;
@@ -41,7 +43,7 @@
     text-decoration: none;
 }
   
-.nav-effect li:before {
+.custom-nav li:before {
     color: black;
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
     content: attr(data-hover);
@@ -52,7 +54,7 @@
     pointer-events: none;
 }
   
-.nav-effect li:after {
+.custom-nav li:after {
     content: '';
     position: absolute;
     left: 0;
@@ -70,14 +72,14 @@
     pointer-events: none;
 }
   
-.nav-effect li:hover:before, .nav-effect li:focus:before {
+.custom-nav li:hover:before, .custom-nav li:focus:before {
     opacity: 0;
     -webkit-transform: translateY(-2px);
     -moz-transform: translateY(-2px);
     transform: translateY(-2px);
 }
   
-.nav-effect li:hover:after, .nav-effect li:focus:after {
+.custom-nav li:hover:after, .custom-nav li:focus:after {
     opacity: 1;
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);

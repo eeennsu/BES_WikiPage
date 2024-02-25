@@ -24,10 +24,8 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
             <body className={gothicA1.className}>        
                 <div className='flex flex-col min-h-dvh'>                 
                     <Header />
-                    <div className='flex justify-center flex-1 relative'>                                 
-                        <Suspense fallback={<MainPageLoading />}>
-                            {children}
-                        </Suspense>
+                    <div className='relative flex justify-center flex-1'>                                
+                        {children}            
                     </div>
                     <Footer />
                     <Modal />
@@ -44,14 +42,3 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
 };
 
 export default Layout;
-
-
-
-const MainPageLoading: NextPage = () => {
-
-    return (
-        <div className='text-6xl text-red-600'>
-            MainPageLoading
-        </div>
-    );
-};
