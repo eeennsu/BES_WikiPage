@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        glassmorphism: "rgba(245, 253, 255, 0.61)",
+        glassmorphism: "rgba(255, 255, 255, 0.61)",
       }
     },
   },

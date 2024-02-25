@@ -2,10 +2,10 @@
 
 import type { FC } from 'react';
 import { FiLogIn } from "react-icons/fi";
+import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import UserLoginForm from './UserLoginForm';
 import useUserStore from '@/zustand/user/useUserStore';
-import { toast } from 'react-toastify';
 
 const UserRegister: FC = () => {
 
@@ -24,7 +24,7 @@ const UserRegister: FC = () => {
 
     return (
         <button 
-            className='flex items-center gap-2 text-xs transition-colors rounded-md hover:text-blue-300'
+            className='flex items-center gap-2 text-md font-semibold uppercase tracking-wider bg-transparent transition-colors rounded-md hover:text-blue-300'
             onClick={handleModalOpen}
         >
             {
@@ -32,14 +32,14 @@ const UserRegister: FC = () => {
                     <>
                         <FiLogIn className='text-xl' />
                         <span className='mt-0.5'>
-                            로그인
+                            Login
                         </span>
                     </>
                 ) : (
                     <>
                         <FiLogIn className='text-xl' />
                         <span className='mt-0.5'>
-                            로그아웃
+                            Logout
                         </span>
                     </>
                 )

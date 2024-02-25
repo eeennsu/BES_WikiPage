@@ -5,13 +5,13 @@ import { MdOutlineEditNote, MdDeleteOutline } from "react-icons/md";
 import { shallow } from 'zustand/shallow';
 import { deleteOneContent } from '@/lib/actions/content.action';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { useRouter } from 'next/navigation';
 import ContentTemplate from '../commons/ContentTemplate';
 import useContentStore from '@/zustand/content/useContentStore';
 import useModal from '@/lib/hooks/useModal';
 import useUserStore from '@/zustand/user/useUserStore';
-import { toast } from 'react-toastify';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { useRouter } from 'next/navigation';
 
 type Props = {
     contentId: string;

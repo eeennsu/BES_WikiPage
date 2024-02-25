@@ -10,7 +10,7 @@ type Props = {
 const RelatedContentCard: FC<Props> = ({ title, teacher }) => {
 
     return (
-        <div className='flex flex-col border rounded-lg shadow-md hover:shadow-lg'>
+        <div className='flex flex-col border rounded-lg shadow-md hover:shadow-xl'>
             <div className='p-4'>
                 <h3 className='w-full text-xs font-medium line-clamp-2 max-w-32'>
                     {title}

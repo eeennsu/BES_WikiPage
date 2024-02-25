@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react';
 import { useCallback } from 'react';
-import { UseModalStoreType } from '@/zustand/modal/types';
 import { shallow } from 'zustand/shallow';
 import useModalStore from '@/zustand/modal/useModalStore';
 import useContentStore from '@/zustand/content/useContentStore';

@@ -1,7 +1,14 @@
 import { FaXTwitter, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
 import { FcHome, FcPhone, FcPrint  } from "react-icons/fc";
 
-export const snsLinks = [
+export type SNSMenu = {
+    name: string;
+    color: string;
+    icon: React.ReactNode;
+    url: string;
+}
+
+export const snsLinks: SNSMenu[] = [
     {
         name: 'X',
         color: 'text-black',
@@ -28,7 +35,12 @@ export const snsLinks = [
     }
 ];
 
-export const footerLinks = [
+export type FooterLink = {
+    name: string;
+    url: string;
+}
+
+export const footerLinks: FooterLink[] = [
     {
         name: '이용약관',
         url: '/'
@@ -43,7 +55,13 @@ export const footerLinks = [
     }
 ];
 
-export const footerInfos = [
+export type FooterInfo = {
+    name: string;
+    value: string;
+    icon: JSX.Element;
+}
+
+export const footerInfos: FooterInfo[] = [
     {
         name: 'Address',
         value: '서울 금천구 가산디지털1로 168 (가산동, 우림라이온스밸리) B동 1206호 코딩허브',
@@ -62,3 +80,5 @@ export const footerInfos = [
 ];
 
 export const selectSubjects = ['HTML & CSS', 'JavaScript', 'Python', 'React.js', 'Next.js', 'Vue.js', 'Java', 'C', 'C++', 'C#', 'Spring boot'];
+
+export const headerNav = [ 'About', 'Community', 'FAQ'];

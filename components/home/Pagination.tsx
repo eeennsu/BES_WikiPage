@@ -75,7 +75,7 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                             className={`flex items-center justify-center rounded-md px-3 py-1.5 ${
                                 page === curPage 
                                 ? 'bg-blue-500 text-white dark:bg-white dark:text-black'
-                                : ' text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white active:bg-gray-200 dark:active:bg-gray-600'
+                                : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white active:bg-gray-200 dark:active:bg-gray-600'
                             }`}
                         >
                             {page}

@@ -5,18 +5,15 @@ import { useState } from 'react';
 import { UserForm, UserFormSchema } from '@/lib/validation/user.validation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { userLogin, userSignUp } from '@/lib/actions/user.action';
+import { userSignUp } from '@/lib/actions/user.action';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import Button from '../commons/ui/Button';
-import useUserStore from '@/zustand/user/useUserStore';
 
 const UserSignUpForm: FC = () => {
 
     const { closeModal } = useModal();
-    const setIsLogin = useUserStore(state => state.setIsLogin);
-    const setUserInfo = useUserStore(state => state.setUserInfo);
 
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 

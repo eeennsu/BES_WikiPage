@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-bg-image {
-    background-image: url('/assets/images/main-bg2.jpg');
+html {
+    scroll-behavior: smooth;
+}
+
+.banner {
+    background-image: url('/assets/images/banner-back.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 60dvh;
     margin: 0;
-}
-
-.main-bg-color {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 .bg-article {
@@ -32,4 +31,59 @@
 .custom-scroll::-webkit-scrollbar-track {
     background-color: rgb(224,224,224);
     border-bottom-right-radius: 4px;
+}
+
+.nav-effect li {
+    color: #686de0;
+    text-shadow: none;
+    padding: 6px 0;
+    color: black;
+    font-family: Lato;
+    font-weight: 600;
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+  
+.nav-effect li:before {
+    color: black;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    content: attr(data-hover);
+    position: absolute;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    pointer-events: none;
+}
+  
+.nav-effect li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: black;
+    opacity: 0;
+    -webkit-transform: translateY(5px);
+    -moz-transform: translateY(5px);
+    transform: translateY(5px);
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    pointer-events: none;
+}
+  
+.nav-effect li:hover:before, .nav-effect li:focus:before {
+    opacity: 0;
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    transform: translateY(-2px);
+}
+  
+.nav-effect li:hover:after, .nav-effect li:focus:after {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
 }

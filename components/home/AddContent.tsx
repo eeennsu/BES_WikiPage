@@ -16,11 +16,9 @@ const AddContent: FC = () => {
     }
 
     return isLogin && (
-        <div>
-            <button onClick={handleModalOpen}>
-                <BiSolidBookAdd className='text-3xl text-blue-600 transition hover:text-blue-500/70'/>        
-            </button>
-        </div>
+        <button onClick={handleModalOpen}>
+            <BiSolidBookAdd className='text-3xl text-blue-600 transition hover:text-blue-500/70'/>        
+        </button>
     );
 }
 

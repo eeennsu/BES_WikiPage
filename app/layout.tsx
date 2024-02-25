@@ -2,14 +2,15 @@ import type { NextPage, Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Gothic_A1 } from "next/font/google";
-import Footer from '@/components/layouts/Footer';
-import Header from '@/components/layouts/Header';
+import { Gothic_A1, Nanum_Gothic_Coding } from "next/font/google";
+import Footer from '@/components/rootLayout/footer/Footer';
+import Header from '@/components/rootLayout/header/Header';
 import Modal from '@/components/commons/ui/Modal';
 import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const inter = Gothic_A1({ weight: '500', subsets: ['latin'] });
+export const gothicA1 = Gothic_A1({ weight: '400', subsets: ['latin'] });
+export const nanumGothic = Nanum_Gothic_Coding({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Coding Hub',
@@ -20,16 +21,13 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
 
    return (
         <html>
-            <body className={inter.className}>        
-                <div className='flex flex-col min-h-dvh'>
+            <body className={gothicA1.className}>        
+                <div className='flex flex-col min-h-dvh'>                 
                     <Header />
-                    <div className='relative flex justify-center flex-1 main-bg-color'>
-                        <div className='absolute w-full top-16 -z-10' />
-                        <main className='w-full max-w-2xl'>
-                            <Suspense fallback={<MainPageLoading />}>
-                                {children}
-                            </Suspense>
-                        </main>
+                    <div className='flex justify-center flex-1 relative'>                                 
+                        <Suspense fallback={<MainPageLoading />}>
+                            {children}
+                        </Suspense>
                     </div>
                     <Footer />
                     <Modal />

@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import AddContent from '@/components/home/AddContent';
 import Contents from '@/components/home/Contents';
+import Banner from '@/components/home/Banner';
 
 type Props = {
     searchParams: {
@@ -11,15 +12,17 @@ type Props = {
 const MainPage: NextPage<Props> = async ({ searchParams }) => {
 
     return (
-        <div className='flex flex-col justify-center h-full py-4'>         
-            <section className='flex justify-end mt-6 px-7'>
-                <AddContent />
-            </section> 
+        <main className='w-full max-w-4xl'>
+            <div className='flex flex-col justify-center-d h-full pb-10'>     
+                <div className='absolute inset-0 banner h-dvh -z-10' />
+                <Banner />
+
+                <AddContent />    
             
-            <section className='flex flex-col gap-6 p-8 pt-2'>
-                <Contents page={searchParams?.page} />                
-            </section>                     
-        </div>
+                <Contents page={searchParams?.page} />       
+                <div className='absolute inset-0 top-[100vh] bg-gradient-to-b from-white to-sky-200/85 -z-10 w-dvw' />        
+            </div>
+        </main>        
     );
 };
 

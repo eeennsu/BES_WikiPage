@@ -11,7 +11,7 @@ const Button: FC<PropsWithChildren<Props>> = ({ onClick, disabled, children, typ
 
     const _color = color === 'BLUE'
         ? 'bg-blue-500 hover:bg-blue-500/80 active:bg-blue-600'
-        : 'bg-orange-400 hover:bg-white hover:border-2 hover:border-orange-500 hover:text-orange-500 border-2 border-orange-400';
+        : 'bg-orange-400 hover:bg-orange-400/80 active:bg-orange-600';
 
     return (
         <button 

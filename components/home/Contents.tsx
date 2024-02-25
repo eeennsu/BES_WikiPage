@@ -14,23 +14,27 @@ const Contents: FC<Props> = async ({ page }) => {
 
     return (
         <>
-            {        
-                contents.map((content) => (                  
-                    <ContentItem
-                        key={content._id} 
-                        content={content}
-                    />                 
-                ))            
-            }
-
-            <div className='relative flex justify-center w-full'>
+            <section
+                id='courses' 
+                className='flex flex-col gap-6 p-8 pt-2'
+            >           
+                {        
+                    contents.map((content) => (                  
+                        <ContentItem
+                            key={content._id} 
+                            content={content}
+                        />                 
+                    ))            
+                }          
+            </section> 
+            <section className='relative flex justify-center w-full'>
                 <Pagination 
                     curPage={curPage}
                     hasNext={hasNext}
                     totalPages={totalPages}
                 />        
-            </div>   
-        </>
+            </section>   
+        </>       
     );
 }
 
