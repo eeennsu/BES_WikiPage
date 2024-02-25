@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { getContents } from '@/lib/actions/content.action';
-import ContentItem from './ContentItem';
+import ContentCard from './ContentCard';
 import Pagination from './Pagination';
 
 type Props = {
@@ -14,13 +14,10 @@ const Contents: FC<Props> = async ({ page }) => {
 
     return (
         <>
-            <section
-                id='courses' 
-                className='flex flex-col gap-6 p-8 pt-2'
-            >           
+            <section className='grid grid-cols-2 gap-5 p-8 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>           
                 {        
                     contents.map((content) => (                  
-                        <ContentItem
+                        <ContentCard
                             key={content._id} 
                             content={content}
                         />                 

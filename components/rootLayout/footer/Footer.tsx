@@ -7,10 +7,10 @@ import SNSMenuItem from '../header/SNSMenuItem';
 const Footer: FC = () => {
 
     return (
-        <footer className='flex justify-center py-4 sm:py-6 bg-white'>
-            <div className='flex flex-col justify-center w-full max-w-5xl gap-4 px-6 sm:gap-24 sm:flex-row sm:px-6'>
-                <div className='flex items-center'>
-                    <ul className='flex flex-col gap-1 text-sm'>
+        <footer className='flex justify-center py-4 bg-gray-200/85 sm:py-4'>
+            <div className='flex flex-col w-full max-w-5xl px-4 sm:justify-between max-sm:px-6 sm:flex-row'>       
+                <div className='items-center hidden sm:flex'>
+                    <div className='flex flex-col gap-2 text-sm'>
                         {
                             footerInfos.map((info) => (
                                 <FooterInfoItem
@@ -19,11 +19,11 @@ const Footer: FC = () => {
                                 />
                             ))
                         }
-                    </ul>
-                </div>
+                    </div>
+                </div>               
                 
                 <div className='flex flex-col items-center justify-center gap-4'>
-                    <ul className='flex gap-4 text-xl'>
+                    <ul className='flex text-xl gap-7 sm:gap-4'>
                         {
                             snsLinks.map((sns) => (
                                 <SNSMenuItem 
@@ -33,6 +33,7 @@ const Footer: FC = () => {
                             ))
                         }
                     </ul> 
+                    
                     <ul className='flex justify-center gap-6 sm:flex-row'>
                         {
                             footerLinks.map((link) => (

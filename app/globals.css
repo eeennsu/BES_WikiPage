@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    scroll-behavior: smooth;
-}
-
 .banner {
-    background-image: url('/assets/images/banner-back.jpg');
+    background-image: url('/assets/images/banner-back2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

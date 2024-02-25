@@ -39,7 +39,7 @@ export const createNewContent = async ({
             $push: { contents: content._id }
         });
 
-        revalidatePath(pathname);
+        revalidatePath(`${pathname}?page=1`);
 
     } catch (error) {
         console.log(error);
@@ -100,7 +100,7 @@ export const getContents = async (curPage: number) => {
 
         const totalPages = Math.ceil(totalContents / pageSize);
         const hasNext = totalPages > skipAmount + contents.length;
-  
+       
         return {
             contents,
             hasNext,
@@ -136,6 +136,8 @@ export const deleteOneContent = async (contentId: string) => {
         connectToDB();
 
         const content = (await ContentModel.deleteOne({ _id: contentId }));
+
+        revalidatePath('/');
 
         return Boolean(content);
 

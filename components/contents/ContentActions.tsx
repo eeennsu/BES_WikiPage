@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
-import ContentTemplate from '../commons/ContentTemplate';
+import ContentForm from '../commons/ContentForm';
 import useContentStore from '@/zustand/content/useContentStore';
 import useModal from '@/lib/hooks/useModal';
 import useUserStore from '@/zustand/user/useUserStore';
@@ -41,7 +41,7 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleUpdate = () => {
-        openModal(<ContentTemplate type='UPDATE' contentId={contentId} />);
+        openModal(<ContentForm type='UPDATE' contentId={contentId} />);
         setTitle(title);
         setText(text);
         setSelectedSubject(subject);

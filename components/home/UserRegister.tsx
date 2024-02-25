@@ -1,8 +1,9 @@
 'use client';
 
 import type { FC } from 'react';
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { toast } from 'react-toastify';
+import { FiUser } from "react-icons/fi";
 import useModal from '@/lib/hooks/useModal';
 import UserLoginForm from './UserLoginForm';
 import useUserStore from '@/zustand/user/useUserStore';
@@ -24,25 +25,27 @@ const UserRegister: FC = () => {
 
     return (
         <button 
-            className='flex items-center gap-2 text-md font-semibold uppercase tracking-wider bg-transparent transition-colors rounded-md hover:text-blue-300'
+            className='flex items-center gap-2 text-sm font-semibold tracking-wider uppercase transition-colors bg-transparent rounded-md hover:text-blue-300'
             onClick={handleModalOpen}
         >
             {
                 !isLogin ? (
                     <>
-                        <FiLogIn className='text-xl' />
-                        <span className='mt-0.5'>
+                        <FiLogIn className='text-xl max-sm:hidden' />
+                        <FiUser className='text-2xl sm:hidden' />
+                        <span className='mt-0.5 max-sm:hidden'>
                             Login
                         </span>
                     </>
                 ) : (
                     <>
-                        <FiLogIn className='text-xl' />
-                        <span className='mt-0.5'>
+                        <FiLogOut className='text-xl' />
+                        
+                        <span className='mt-0.5 max-sm:hidden'>
                             Logout
                         </span>
                     </>
-                )
+                ) 
             }
         </button>  
     ); 

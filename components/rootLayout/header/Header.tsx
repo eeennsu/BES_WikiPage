@@ -4,12 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UserRegister from '../../home/UserRegister';
 import NavItem from './NavItem';
+import MobileNav from './MobileNav';
 
 const Header: FC = () => {
 
     return (
-        <header className='sticky top-0 z-10 flex justify-center w-full h-20 shadow-sm bg-glassmorphism backdrop-blur-lg'>
-            <div className='flex items-center justify-between w-full max-w-4xl px-10 sm:px-12'>
+        <header className='sticky top-0 z-10 flex justify-center w-full h-20 shadow-md sm:shadow-sm bg-glassmorphism backdrop-blur-lg'>
+            <div className='flex items-center justify-between w-full px-10 max-w-7xl xl:max-w-[1460px]'>
+                <MobileNav /> 
+
                 <Link href='/'>
                     <Image 
                         src='/assets/images/codinghub.png'
@@ -20,22 +23,26 @@ const Header: FC = () => {
                     />
                 </Link>       
 
-                <nav className='flex justify-between gap-9 items-center'>
-                    <ul className='flex items-center gap-7 nav-effect'>
-                        {
-                            headerNav.map((nav) => (
-                                <NavItem
-                                    key={nav}
-                                    nav={nav}
-                                />
-                            ))
-                        }
-                    </ul>
-                    <span className='text-2xl font-normal cursor-default'>
+                <div className='flex items-center justify-between gap-9'>
+                    <nav className='max-sm:hidden'>
+                        <ul className='flex items-center gap-7 nav-effect'>
+                            {
+                                headerNav.map((nav) => (
+                                    <NavItem
+                                        key={nav}
+                                        nav={nav}
+                                    />
+                                ))
+                            }
+                        </ul>                           
+                    </nav>     
+
+                    <span className='text-2xl font-normal cursor-default max-sm:hidden'>
                         |
-                    </span>
-                    <UserRegister />   
-                </nav>     
+                    </span>  
+                 
+                    <UserRegister /> 
+                </div>  
             </div>   
         </header>
     );

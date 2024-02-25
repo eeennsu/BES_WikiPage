@@ -9,7 +9,7 @@ type Props = {
 const SNSMenuItem: FC<Props> = ({ sns }) => {
 
     return (
-        <li className='transition hover:scale-[1.35] cursor-pointer rounded-full bg-sky-200/50 duration-300 p-1.5'>                                    
+        <li className='transition hover:scale-[1.35] cursor-pointer rounded-full bg-white shadow-md duration-300 p-2 sm:p-1.5'>                                    
             <Link 
                 className={sns.color} 
                 href={sns.url}

@@ -8,15 +8,17 @@ type Props = {
 const FooterInfoItem: FC<Props> = ({ info }) => {
 
     return (
-        <li>                                
-            <span className='inline-flex w-20 gap-2 font-semibold'>    
+        <div className='flex items-center sm:grid sm:grid-cols-5 max-sm:gap-2'>                                
+            <p className='flex gap-2.5 sm:col-span-1'>    
                 {info.icon}                                    
-                {info.name} 
-            </span>
-            <span className='ml-4 text-xs'>
+                <span className='max-sm:hidden'>
+                    {info.name} 
+                </span>
+            </p>
+            <p className='text-xs font-semibold sm:col-span-4'>
                 {info.value}
-            </span>
-        </li>
+            </p>
+        </div>
     );
 }
 

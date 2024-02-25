@@ -17,19 +17,24 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
     const pathname = usePathname();
     const router = useRouter();
 
-    const maxVisiblePage = 5;                                       // 보여줄 페이지 버튼 개수 (5개)
-    const middlePageIndex = Math.floor(maxVisiblePage / 2);         // 2
+    const maxVisiblePage = 5;                                               // 보여줄 페이지 버튼 개수 (5개)
+    const diff = Math.floor((maxVisiblePage - 1) / 2);                      // 현재 페이지를 중심으로 양옆에 보여줄 버튼 2개
 
+    let startPage = Math.max(1, curPage - diff);                            // 현재 페이지가 2 이하일땐 좌측 페이지 2개를 보여줄 수 없으므로
+    const endPage = Math.min(totalPages, startPage + maxVisiblePage - 1);   // 마찬가지로 현재페이지가 마지막 페이지 -1 이상을 경우 우측 페이지 2개를 보여줄 수 없으므로
+    
     // 현재 페이지를 중심으로 좌우 2개를 보여주는 숫자 배열
     const pagesToShow: number[] = useMemo(() => {
-        const startPage = Math.max(1, curPage - middlePageIndex);               // 현재 페이지가 2 이하일땐 좌측 페이지 2개를 보여줄 수 없으므로
-        const endPage = Math.min(totalPages, startPage + maxVisiblePage - 1);   // 마찬가지로 현재페이지가 마지막 페이지 -1 이상을 경우 우측 페이지 2개를 보여줄 수 없으므로
-        
-        if (endPage - startPage + 1 < maxVisiblePage) {
-            // 페이지 수가 maxVisiblePage보다 적을 경우, startPage를 변경하여 보여지는 페이지 수를 맞춤
-            return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+
+        // 페이지 수가 maxVisiblePage (=5개) 이하인 경우 있는 모든 버튼을 보여줌
+        if (totalPages <= maxVisiblePage) {
+            return Array.from({ length: totalPages }, (_, i) => i + 1);
         }
-      
+    
+        if (endPage === totalPages) {
+            startPage = Math.max(1, totalPages - maxVisiblePage + 1);
+        }
+  
         return Array.from({ length: maxVisiblePage }, (_, i) => startPage + i);
     }, [curPage, totalPages]);
 
@@ -51,20 +56,24 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
 
     const pushRouter = (nextPage: number) => {
         if (nextPage > 1) {
-            router.push(`${pathname}?page=${nextPage}`);
+            router.push(`${pathname}?page=${nextPage}`, { scroll: false });
         } else {
-            router.push(`${pathname}`);
+            router.push(`${pathname}`, { scroll: false });
         }
     }
 
     return (
         <>
-            <button 
-                onClick={() => handleNavigation('PREV')} 
-                disabled={curPage === 1}
-            >
-                <RiArrowLeftSLine className='text-2xl' />
-            </button>
+            {
+                curPage !== startPage && (
+                    <button 
+                        onClick={() => handleNavigation('PREV')} 
+                        disabled={curPage === 1}
+                    >
+                        <RiArrowLeftSLine className='text-2xl' />
+                    </button>
+                )
+            }
 
             <div className='flex gap-2 mx-4'>
                 {
@@ -84,12 +93,16 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                 }
             </div>
 
-            <button
-                onClick={() => handleNavigation('NEXT')}
-                disabled={curPage === totalPages}
-            >
-                <RiArrowRightSLine className='text-2xl' />
-            </button>
+            {
+                curPage !== endPage && (
+                    <button
+                        onClick={() => handleNavigation('NEXT')}
+                        disabled={curPage === totalPages}
+                    >
+                        <RiArrowRightSLine className='text-2xl' />
+                    </button>
+                )
+            }
         </>
     );
 }

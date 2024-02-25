@@ -15,10 +15,10 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
     const content = (await getDetailContent(_id)) as Content;
     
     return (
-        <article className='w-full pb-10 mt-10'>
+        <article className='w-full pb-10 mt-6 sm:mt-10'>
             <section>
                 <div className='flex items-center justify-between gap-4'>
-                    <h2 className='text-xl font-semibold break-keep'>
+                    <h2 className='text-2xl font-semibold sm:text-xl break-keep'>
                         {content.title}
                     </h2>
                     <ContentActions
@@ -32,11 +32,7 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                 </div>
 
                 <div className='flex items-center justify-between text-sm mt-7'>
-                    <h3>                   
-                        강사                      
-                        <span className='mx-2'>
-                            -
-                        </span>
+                    <h3 className='font-bold'>                 
                         {content.teacher}
                     </h3>
                     <p className='italic'>

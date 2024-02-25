@@ -11,12 +11,12 @@ type Props = {
 const ButtonContent: FC<PropsWithChildren<Props>> = ({ className, onClick, children, disabled, color = 'BLUE', type = 'button' }) => {
 
     const _color = color === 'BLUE' 
-        ? 'bg-blue-400 hover:bg-blue-500 active:bg-blue-600 text-white'
+        ? 'bg-blue-500 hover:bg-blue-400 active:bg-blue-500/65 text-white'
         : 'bg-red-400 hover:bg-red-500  active:bg-red-600 text-white'; 
 
     return (
         <button 
-            className={`inline-flex justify-center px-4 py-2 whitespace-nowrap text-sm font-medium border border-transparent rounded-md shadow-sm focus-visible:ring-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 hover:shadow-lg ${_color} ${className}`} 
+            className={`inline-flex items-center justify-center px-4 py-2 whitespace-nowrap text-sm font-medium border border-transparent rounded-md shadow-sm focus-visible:ring-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 hover:shadow-lg ${_color} ${className}`} 
             type={type}
             disabled={disabled}
             onClick={onClick}
