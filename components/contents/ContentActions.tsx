@@ -41,7 +41,7 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleUpdate = () => {
-        openModal(<ContentForm type='UPDATE' contentId={contentId} />);
+        openModal(<ContentForm type='UPDATE' contentId={contentId} />, 'max-w-3xl');
         setTitle(title);
         setText(text);
         setSelectedSubject(subject);

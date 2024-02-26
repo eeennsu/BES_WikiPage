@@ -1,46 +1,59 @@
 import type { FC } from 'react';
+import { priceFormat } from '@/lib/utils/util.format';
 import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
-    content: Content;
+    content: ContentCardInfo;
 }
 
 const ContentCard: FC<Props> = ({ content }) => {
 
-    return (
-        <div className='flex flex-col items-center w-full h-full bg-white rounded-md drop-shadow-md'>
-            <figure className='relative flex w-full h-[120px] overflow-hidden'>
+    return (    
+        <div className='relative flex flex-col items-center bg-white rounded-md rounded-t-lg drop-shadow-md group'>        
+            <figure className='relative w-full h-[140px] overflow-hidden'>
                 <Image 
                     src={'https://picsum.photos/seed/picsum/230/120'}
                     alt={'thumbnail'}
-                    className='transition duration-500  shadow-md hover:scale-[1.15]'
+                    className='transition-all duration-300 shadow-md rounded-t-xl group-hover:brightness-50'
                     fill
                 />                
-            </figure>
+            </figure>         
 
-            <div className='p-[18px] w-44'>
-                <h4 className='h-8'>
-                    <Link
-                        href={`/contents/${content._id}`}                                           
-                        className='text-xs font-semibold sm:text-sm line-clamp-2 hover:underline underline-offset-4'
-                    > 
+            <Link
+                href={`/contents/${content._id}`}                                           
+                className='text-xs font-semibold line-clamp-2 hover:underline underline-offset-4'
+            > 
+                <div className='absolute left-0 right-0 h-[124px] p-[18px] text-black transition-all bg-white top-28 rounded-b-lg rounded-tl-4xl overflow-hidden group-hover:top-[42px] group-hover:h-[194px]'>
+                    <h4 className='h-8 line-clamp-2'>
                         {content.title}      
-                    </Link>
-                </h4>
+                    </h4>
 
-                <p className='mt-4 text-xs text-gray-500 sm:text-sm'>
-                    {content.teacher}
-                </p>
+                    <div className='mt-6 overflow-hidden text-xs'>
+                        <p className='text-gray-500'>
+                            {content.teacher}
+                        </p>
 
-                <p className='mt-1 text-xs italic font-bold text-blue-600 sm:text-sm'>
-                    {content.subject}
-                </p>
-
-                <p className='mt-0.5 text-xs text-gray-700 sm:text-sm'>
-                
-                </p>
-            </div>         
+                        <p className='mt-1 font-bold text-blue-600'>
+                            {
+                                content?.price ? (
+                                    <span className='tracking-wider'>
+                                        &#8361;&nbsp;{priceFormat(content.price)}
+                                    </span>
+                                ) : (
+                                    <span className='text-orange-400'>
+                                        무료
+                                    </span>
+                                )
+                            }
+                        </p>
+                    </div>
+                    
+                    <p className='mt-3 overflow-hidden font-light leading-4 text-gray-600 line-clamp-4 text-xxs'>
+                        {content.text}
+                    </p>
+                </div>    
+            </Link>                
         </div>
     );
 }

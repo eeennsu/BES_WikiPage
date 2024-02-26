@@ -17,14 +17,15 @@ const RelatedContents: FC<Props> = async ({ contentId, subject }) => {
             <h3 className='text-lg font-semibold'> 
                 {subject} 관련 강의 <span className='ml-2 font-light text-blue-400'>{relatedContens?.length}개</span>
             </h3>
-            <div className='grid justify-start grid-cols-2 gap-4 mt-6 md:grid-cols-3 lg:grid-cols-4'>
+            <div className='grid justify-start grid-cols-2 gap-4 mt-6 sm:grid-cols-3 md:grid-cols-4'>
                 {
                     relatedContens?.map((content) => (
                         <Link 
                             key={content._id}
                             href={`/contents/${content._id}`}
                         >
-                            <RelatedContentCard                              
+                            <RelatedContentCard     
+                                key={content._id}                         
                                 title={content.title}
                                 teacher={content.teacher}
                             />

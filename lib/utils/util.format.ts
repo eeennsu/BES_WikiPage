@@ -12,3 +12,8 @@ export const dateFormat = (dateString: string) => {
 
     return format;
 }
+
+export const priceFormat = (price: number | string) => {
+    
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

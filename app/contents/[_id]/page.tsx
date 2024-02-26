@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { getDetailContent } from '@/lib/actions/content.action';
-import { dateFormat } from '@/lib/utils/util.format';
+import { dateFormat, priceFormat } from '@/lib/utils/util.format';
 import ContentActions from '@/components/contents/ContentActions';
 import RelatedContents from '@/components/contents/RelatedContents';
 
@@ -13,50 +13,64 @@ type Props = {
 const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
     
     const content = (await getDetailContent(_id)) as Content;
-    await (new Promise((res) => setTimeout(res, 3000)));
 
     if (!content) throw new Error('Not founded this content');
-
+    
     return (
         <article className='w-full pb-10 mt-6 sm:mt-10'>
-            <section>
-                <div className='flex items-center justify-between gap-4'>
-                    <h2 className='text-2xl font-semibold sm:text-xl break-keep'>
-                        {content.title}
-                    </h2>
-                    <ContentActions
-                        contentId={content._id.toString()}
-                        authorId={content.author.toString()}
-                        title={content.title}
-                        text={content.text}
-                        subject={content.subject}
-                        teacher={content.teacher}
-                    />
-                </div>
+      
+            <section className='flex items-center justify-between gap-4'>              
+                <h2 className='text-2xl font-semibold sm:text-xl break-keep'>
+                    {content.title}
+                </h2>   
+         
+                 <ContentActions
+                    contentId={content._id.toString()}
+                    authorId={content.author.toString()}
+                    title={content.title}
+                    text={content.text}
+                    subject={content.subject}
+                    teacher={content.teacher}
+                />
+            </section>
 
-                <div className='flex items-center justify-between text-sm mt-7'>
+            <section className='flex items-center justify-between mt-3.5 text-sm'>
+                <div className='flex'>
                     <h3 className='font-bold'>                 
                         {content.teacher}
                     </h3>
-                    <p className='italic'>
-                        {dateFormat(content.createdAt)} 작성됨
-                    </p>
+                    <span className='mx-4'>
+                        |
+                    </span>
+                    {
+                        content?.price ? (
+                            <p className='italic text-blue-500'>
+                                &#8361;&nbsp;{priceFormat(content.price)}
+                            </p>
+                        ) : (
+                            <p className='text-orange-400'>
+                                무료
+                            </p>
+                        )
+                    } 
                 </div>
-            </section>
+
+                <p className='italic'>
+                    {dateFormat(content.createdAt)} 작성됨
+                </p>
+            </section>          
 
             <hr className='mt-2 border-t rounded-sm border-t-black' />
 
             <figure className='flex justify-center mt-8'>
                 <video 
-                    width='600' 
-                    height='240'
-                    className='rounded-md drop-shadow-md'
+                    className='object-cover w-[780px] h-[450px] rounded-md drop-shadow-md'
                     controls 
                     preload='none'
                 >
                     {/* 더미 비디오 소스 */}
                     <source 
-                        src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' 
+                        src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' 
                         type='video/mp4' 
                     />
                     <track
@@ -65,7 +79,7 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                         srcLang='en'
                         label='English'
                     />
-                    Your browser does not support the video tag.
+                    현재 브라우저는 video를 지원하지 않습니다.
                 </video>
             </figure>
 

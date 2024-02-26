@@ -14,7 +14,7 @@ const Contents: FC<Props> = async ({ page }) => {
 
     return (
         <>
-            <section className='grid grid-cols-2 gap-5 p-8 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>           
+            <section className='grid grid-cols-2 p-5 mt-4 gap-x-4 gap-y-28 lg:gap-y-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>           
                 {        
                     contents.map((content) => (                  
                         <ContentCard
@@ -24,7 +24,8 @@ const Contents: FC<Props> = async ({ page }) => {
                     ))            
                 }          
             </section> 
-            <section className='relative flex justify-center w-full'>
+            
+            <section className='flex justify-center w-full mt-32'>
                 <Pagination 
                     curPage={curPage}
                     hasNext={hasNext}

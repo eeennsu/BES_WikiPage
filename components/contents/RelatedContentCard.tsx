@@ -1,6 +1,4 @@
 import type { FC } from 'react';
-import { PiChalkboardTeacher } from 'react-icons/pi';
-// import { FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
 
 type Props = {
@@ -11,29 +9,25 @@ type Props = {
 const RelatedContentCard: FC<Props> = ({ title, teacher }) => {
 
     return (
-        <div className='relative flex flex-col rounded-lg shadow-md tborder hover:shadow-xl'>
-            <div className='p-4'>
-                <h3 className='w-full text-sm font-bold line-clamp-2 underline-offset-4 hover:underline'>
-                    {title}              
-                </h3>
-            </div>
-
-            <figure className='relative w-full h-[120px]'>
-                <Image
-                    src='https://picsum.photos/seed/picsum/164/120'
+        <div className='flex flex-col items-center justify-start bg-white rounded-md rounded-t-md drop-shadow-md group'>        
+            <figure className='relative w-full h-[120px] overflow-hidden'>
+                <Image 
+                    src={'https://picsum.photos/seed/picsum/200/120'}
+                    alt={'thumbnail'}
+                    className='transition duration-500 rounded-t-md  shadow-md group-hover:scale-[1.15]'
                     fill
-                    alt='Placeholder'                                    
-                />               
-            </figure>
-            
-            <p className='flex items-center justify-center gap-3 p-3.5 text-sm font-semibold'>
-                <PiChalkboardTeacher className='text-2xl' />
-                {teacher}
-            </p>
+                />                
+            </figure>         
 
-            {/* <div className='absolute hidden text-2xl group-hover:block animate-ping bottom-4 right-4'>
-                <FaExternalLinkAlt />
-            </div> */}
+            <div className='w-full p-4'>
+                <h4 className='h-8 text-xs font-semibold sm:h-10 sm:text-sm line-clamp-2 hover:underline underline-offset-4'>
+                    {title}  
+                </h4>
+
+                <p className='mt-4 text-xs text-gray-500 sm:text-sm'>
+                    {teacher}
+                </p>
+            </div>         
         </div>
     );
 }

@@ -24,11 +24,15 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
             <body className={gothicA1.className}>        
                 <div className='flex flex-col min-h-dvh'>                 
                     <Header />
+
                     <div className='relative flex justify-center flex-1'>                                
                         {children}            
                     </div>
+
                     <Footer />
+
                     <Modal />
+                    
                     <ToastContainer 
                         position='top-center' 
                         hideProgressBar 

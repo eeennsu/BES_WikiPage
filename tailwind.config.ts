@@ -10,6 +10,12 @@ const config: Config = {
     extend: {
       colors: {
         glassmorphism: "rgba(255, 255, 255, 0.61)",
+      },
+      borderRadius: {
+        '4xl': '32px',
+      },
+      fontSize: {
+        'xxs': ['10px', '12px']
       }
     },
   },

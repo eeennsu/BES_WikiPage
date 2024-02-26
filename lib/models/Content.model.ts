@@ -25,6 +25,10 @@ const ContentSchema = new Schema({
     teacher: {
         type: String,
         required: true
+    },
+
+    price: {
+        type: Number,
     }
 });
 

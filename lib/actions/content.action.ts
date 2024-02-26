@@ -39,7 +39,7 @@ export const createNewContent = async ({
             $push: { contents: content._id }
         });
 
-        revalidatePath(`${pathname}?page=1`);
+        revalidatePath(`${pathname}?page=1`);           // 새글 생성후 첫 페이지로 이동
 
     } catch (error) {
         console.log(error);
@@ -74,7 +74,7 @@ export const updateContent = async ({
 
         await exists.save();
 
-        revalidatePath(pathname);
+        revalidatePath(pathname);           // 수정후 경로 재검증 (데이터 업데이트)
 
     } catch (error) {
         console.log(error);
@@ -93,9 +93,9 @@ export const getContents = async (curPage: number) => {
             .sort({ createdAt: 'desc' })
             .skip(skipAmount)
             .limit(pageSize)
-            .select(['title', 'subject', 'teacher']);
+            .select(['title', 'text', 'subject', 'teacher', 'price']);
 
-        const contents = (await query.exec()) as Content[];
+        const contents = (await query.exec()) as ContentCardInfo[];
         const totalContents = await ContentModel.countDocuments();
 
         const totalPages = Math.ceil(totalContents / pageSize);
@@ -135,7 +135,7 @@ export const deleteOneContent = async (contentId: string) => {
     try {
         connectToDB();
 
-        const content = (await ContentModel.deleteOne({ _id: contentId }));
+        const content = await ContentModel.deleteOne({ _id: contentId });
 
         revalidatePath('/');
 
@@ -157,10 +157,13 @@ export const getRelatedContents = async ({
     try {
         connectToDB();
 
-        const relatedContents = await ContentModel.find({ 
-            _id: { $ne: contentId },
-            subject
-        }).select(['title', 'teacher']);
+        const relatedContents = await ContentModel
+            .find({ 
+                _id: { $ne: contentId },
+                subject
+            })
+            .select(['title', 'teacher'])
+            .limit(10);
         
         if (!relatedContents) {
             return null;

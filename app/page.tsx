@@ -14,7 +14,7 @@ const MainPage: NextPage<Props> = async ({ searchParams }) => {
     return (
         <main className='w-full max-w-5xl'>
             <div className='flex flex-col h-full pb-10 justify-center-d'>     
-                <div className='absolute inset-0 banner h-dvh -z-10' />
+                <div className='absolute inset-0 banner -z-10' />
                 <Banner />
 
                 <AddContent />    

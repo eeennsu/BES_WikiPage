@@ -4,7 +4,7 @@ import { nanumGothic } from '@/app/layout';
 const Banner: FC = () => {
 
     return (
-        <section className='w-full pb-10 sm:pb-24 pt-36'>
+        <section className='w-full pb-10 sm:pb-24 pt-28'>
             <div className='container grid items-center gap-4 px-4 text-center md:px-6 lg:gap-10'>
                 <div className='space-y-8'>
                     <h1 className='text-3xl font-bold sm:text-4xl md:text-5xl'>
