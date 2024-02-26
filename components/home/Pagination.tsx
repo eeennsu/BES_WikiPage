@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
+import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri';
 
 type Props = {
     curPage: number,

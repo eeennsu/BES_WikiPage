@@ -4,4 +4,7 @@ export type UseModalStoreType = {
 
     modalContent: React.ReactNode;
     setModalContent: (content: React.ReactNode) => void;
+
+    modalMaxWidth: string;
+    setModalMaxWidth: (maxWidth: string) => void;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
-import { MdOutlineEditNote, MdDeleteOutline } from "react-icons/md";
+import { MdOutlineEditNote, MdDeleteOutline } from 'react-icons/md';
 import { shallow } from 'zustand/shallow';
 import { deleteOneContent } from '@/lib/actions/content.action';
 import { useState } from 'react';

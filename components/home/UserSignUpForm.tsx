@@ -6,7 +6,7 @@ import { UserForm, UserFormSchema } from '@/lib/validation/user.validation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userSignUp } from '@/lib/actions/user.action';
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import Button from '../commons/ui/Button';

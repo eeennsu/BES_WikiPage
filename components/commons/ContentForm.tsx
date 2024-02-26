@@ -95,19 +95,23 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
     }
 
     return (
-        <form className='grid min-w-[768px] gap-4 py-6' onSubmit={handleSubmit}>
-            <div className='flex flex-col space-y-1'>
+        <form 
+            className='grid w-full gap-1 py-1 sm:gap-4 md:py-6' 
+            onSubmit={handleSubmit}
+        >
+            <div className='flex flex-col w-full space-y-1'>
                 <label htmlFor='title'>
                     제목
                 </label>
                 <input 
                     id='title' 
-                    className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none ' 
+                    className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
                     placeholder='제목을 입력해주세요' 
                     value={title} 
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
+
             <div className='flex flex-col mt-4 space-y-1'>
                 <label htmlFor='text'>
                     내용
@@ -121,8 +125,9 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     onChange={(e) => setText(e.target.value)}
                 />
             </div>
-            <div className='flex items-center gap-6 mt-4'>
-                <div className='relative flex flex-col items-start flex-1 space-y-1'>
+            
+            <div className='flex flex-col items-center gap-6 mt-4 sm:flex-row'>
+                <div className='relative flex flex-col items-start w-full space-y-1'>
                     <Listbox 
                         value={selectedSubject} 
                         onChange={setSelectedSubject}                    
@@ -130,9 +135,11 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         <Listbox.Label htmlFor='subject'>
                             주제
                         </Listbox.Label>
-                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2  focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
+                        
+                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
                             {selectedSubject}                    
                         </Listbox.Button>
+
                         <Transition
                             enter='transition duration-100 ease-out'
                             enterFrom='transform scale-95 opacity-0'
@@ -144,7 +151,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         >
                             <Listbox.Options 
                                 id='subject' 
-                                className='w-full overflow-y-auto rounded-md shadow-sm min-w-36 max-h-[200px] custom-scroll'
+                                className='w-full overflow-y-auto rounded-md shadow-sm min-w-20 max-h-[200px] custom-scroll'
                             >
                                 {
                                     selectSubjects.map((subject) => (
@@ -155,8 +162,8 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                                         >
                                             {
                                                 ({ active, selected }) => (
-                                                    <li className={`flex items-center gap-1 p-2 pl-4 cursor-pointer shadow-md ${
-                                                        active ? 'bg-blue-400 text-white' : 'bg-white text-black'
+                                                    <li className={`flex items-center gap-1 p-2 cursor-pointer shadow-md ${
+                                                        active ? 'bg-blue-400 text-white pl-3' : 'pl-3 bg-white text-black'
                                                     }`}>
                                                         {selected && <MdCheckCircleOutline />}
                                                         {subject}
@@ -169,20 +176,22 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                             </Listbox.Options>
                         </Transition>
                     </Listbox>                
-                </div>           
-                <div className='flex flex-col space-y-1'>
+                </div>        
+
+                <div className='flex flex-col w-full space-y-1'>
                     <label htmlFor='teacher'>
                         강사
                     </label>
                     <input 
                         id='teacher' 
-                        className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none ' 
+                        className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
                         placeholder='강사를 입력해주세요' 
                         value={teacher} 
                         onChange={(e) => setTeacher(e.target.value)}
                     />
                 </div>
             </div>
+
             <div className='flex justify-center gap-5 mt-4'>
                 <ButtonContent 
                     className='w-[88px]'
@@ -199,7 +208,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         )
                     }
                 </ButtonContent>
-         
+        
                 <ButtonContent 
                     type='button'
                     onClick={closeModal} 

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .banner {
-    background-image: url('/assets/images/banner-back2.jpg');
+    background-image: url('/assets/images/banner-back.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -23,7 +23,7 @@ const Footer: FC = () => {
                 </div>               
                 
                 <div className='flex flex-col items-center justify-center gap-4'>
-                    <ul className='flex text-xl gap-7 sm:gap-4'>
+                    <ul className='flex text-xl gap-7 sm:gap-5'>
                         {
                             snsLinks.map((sns) => (
                                 <SNSMenuItem 

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { PiChalkboardTeacher } from 'react-icons/pi';
-// import { FaExternalLinkAlt } from "react-icons/fa";
+// import { FaExternalLinkAlt } from 'react-icons/fa';
 import Image from 'next/image';
 
 type Props = {

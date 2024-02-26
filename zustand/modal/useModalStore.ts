@@ -10,6 +10,9 @@ const useModalStore = createWithEqualityFn<UseModalStoreType>()(
 
             modalContent: null,
             setModalContent: (content: React.ReactNode) => set(() => ({ modalContent: content }), false, 'SET_MODAL_CONTENT'),
+
+            modalMaxWidth: 'max-w-max',
+            setModalMaxWidth: (modalMaxWidth: string) => set(() => ({ modalMaxWidth }), false, 'SET_MODAL_MAX_WIDTH'),
         })
     )
 );

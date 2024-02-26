@@ -7,7 +7,7 @@ import useModal from '@/lib/hooks/useModal';
 
 const Modal: FC = () => {
 
-    const { closeModal, isModalOpen, modalContent } = useModal();
+    const { closeModal, isModalOpen, modalContent, modalMaxWidth } = useModal();
 
     return (
         <Transition
@@ -29,7 +29,7 @@ const Modal: FC = () => {
                 </Transition.Child>
                 
                 <div className='fixed inset-0 overflow-y-auto'>
-                    <div className='flex items-center justify-center min-h-full p-4 text-center'>
+                    <div className='flex items-center justify-center min-h-full p-4'>
                         <Transition.Child
                             as={Fragment}
                             enter='ease-out duration-300'
@@ -39,10 +39,8 @@ const Modal: FC = () => {
                             leaveFrom='opacity-100 scale-100'
                             leaveTo='opacity-0 scale-95'
                         >
-                            <Dialog.Panel className='w-full p-6 text-left align-middle transition-all transform bg-white rounded-lg shadow-md max-w-max'>
-                                <div className='mt-2'>
-                                    {modalContent}
-                                </div>                                           
+                            <Dialog.Panel className={`w-full p-6 transition-all transform bg-white rounded-lg shadow-md ${modalMaxWidth}`}>
+                                {modalContent}                                    
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>

@@ -1,37 +1,26 @@
-import { FaXTwitter, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
-import { FcHome, FcPhone, FcPrint  } from "react-icons/fc";
+import { FcHome, FcPhone, FcPrint } from 'react-icons/fc';
 
 export type SNSMenu = {
     name: string;
-    color: string;
-    icon: React.ReactNode;
     url: string;
+    iconSrc: string;
 }
 
 export const snsLinks: SNSMenu[] = [
     {
-        name: 'X',
-        color: 'text-black',
-        icon: <FaXTwitter />,
-        url: '/'
-    },
-    {
         name: 'Instagram',
-        color: 'text-red-400',
-        icon: <FaInstagram />,
-        url: '/'
+        url: '/',
+        iconSrc: '/assets/icons/instagram.svg'
     },
     {
         name: 'Youtube',
-        color: 'text-red-600',
-        icon: <FaYoutube />,
-        url: '/'
+        url: '/',
+        iconSrc: '/assets/icons/youtube.svg'
     },
     {
         name: 'Facebook',
-        color: 'text-blue-700',
-        icon: <FaFacebook />,
-        url: '/'
+        url: '/',
+        iconSrc: '/assets/icons/facebook.svg'
     }
 ];
 

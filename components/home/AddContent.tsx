@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
-import { BiSolidBookAdd } from "react-icons/bi";
+import { BiSolidBookAdd } from 'react-icons/bi';
 import ContentForm from '../commons/ContentForm';
 import useModal from '@/lib/hooks/useModal';
 import useUserStore from '@/zustand/user/useUserStore';
@@ -13,7 +13,7 @@ const AddContent: FC = () => {
     const isLogin = useUserStore(state => state.isLogin);
     
     const handleModalOpen = () => {
-        openModal(<ContentForm type='CREATE' />);
+        openModal(<ContentForm type='CREATE' />, 'max-w-3xl');
     }
 
     return isLogin && (
@@ -28,7 +28,7 @@ const AddContent: FC = () => {
 
             {/* mobile */}
             <div className='flex justify-center sm:hidden'>
-                <ButtonLight>
+                <ButtonLight onClick={handleModalOpen}>
                     강의 추가
                     <BiSolidBookAdd className='text-2xl'/>
                 </ButtonLight>

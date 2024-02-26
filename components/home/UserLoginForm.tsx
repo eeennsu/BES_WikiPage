@@ -3,7 +3,7 @@
 import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 import { userLogin } from '@/lib/actions/user.action';
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import Button from '../commons/ui/Button';
@@ -55,7 +55,7 @@ const UserLoginForm: FC = () => {
     }
 
     const formChange = () => {
-        openModal(<UserSignUpForm />);
+        openModal(<UserSignUpForm />, 'max-w-5xl');
     }
 
     return (

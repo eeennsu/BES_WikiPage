@@ -1,9 +1,9 @@
 'use client';
 
 import type { FC } from 'react';
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { toast } from 'react-toastify';
-import { FiUser } from "react-icons/fi";
+import { FiUser } from 'react-icons/fi';
 import useModal from '@/lib/hooks/useModal';
 import UserLoginForm from './UserLoginForm';
 import useUserStore from '@/zustand/user/useUserStore';
