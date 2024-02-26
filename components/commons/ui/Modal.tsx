@@ -25,7 +25,7 @@ const Modal: FC = () => {
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'
                 >
-                    <div className='fixed inset-0 bg-black/35' onClick={closeModal} />
+                    <div className='fixed inset-0 bg-black/55' onClick={closeModal} />
                 </Transition.Child>
                 
                 <div className='fixed inset-0 overflow-y-auto'>

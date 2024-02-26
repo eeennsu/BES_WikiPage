@@ -3,15 +3,11 @@
 import type { FC } from 'react';
 import { MdOutlineEditNote, MdDeleteOutline } from 'react-icons/md';
 import { shallow } from 'zustand/shallow';
-import { deleteOneContent } from '@/lib/actions/content.action';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { useRouter } from 'next/navigation';
 import ContentForm from '../commons/ContentForm';
 import useContentStore from '@/zustand/content/useContentStore';
 import useModal from '@/lib/hooks/useModal';
 import useUserStore from '@/zustand/user/useUserStore';
+import ConfirmDelete from './ConfirmDelete';
 
 type Props = {
     contentId: string;
@@ -20,54 +16,42 @@ type Props = {
     text: string;
     subject: string;
     teacher: string;
+    price?: number;
 }
 
-const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, teacher }) => {
+const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, teacher, price }) => {
     
-    const rotuer = useRouter();
-
     const { openModal } = useModal();
     const {
         setTitle, setText,
-        setSelectedSubject, setTeacher
+        setSelectedSubject, setTeacher, 
+        setPrice
     } = useContentStore(state => ({
         setTitle: state.setTitle, setText: state.setText,
-        setSelectedSubject: state.setSelectedSubject, setTeacher: state.setTeacher
+        setSelectedSubject: state.setSelectedSubject, setTeacher: state.setTeacher,
+        setPrice: state.setPrice
     }), shallow);
 
     const curUserId = useUserStore(state => state.userInfo?._id);
     const isAuhor = curUserId === authorId;
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-
     const handleUpdate = () => {
-        openModal(<ContentForm type='UPDATE' contentId={contentId} />, 'max-w-3xl');
+        openModal(<ContentForm type='UPDATE' contentId={contentId} />, 'max-w-4xl');
         setTitle(title);
         setText(text);
         setSelectedSubject(subject);
         setTeacher(teacher);
+        setPrice(price || 0);
     }
 
-    const handleDelete = async () => {
-        try {
-            setIsLoading(true);
-            
-            await deleteOneContent(contentId);
-            toast.success('삭제에 성공하였습니다');
-            
-        } catch (error) {
-            toast.error('알 수 없는 이유로 삭제에 실패하였습니다');
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-            rotuer.push('/');
-        }
+    const handleDeleteModal = async () => {
+        openModal(<ConfirmDelete contentId={contentId} />, 'max-w-max');
     }
 
     // 현재 로그인한 유저 === 글 작성자가 같을 때만, 수정과 삭제가 보이도록
     return (
         isAuhor && (
-            <div className='flex gap-3 h-fit'>             
+            <div className='flex flex-col gap-3 h-fit sm:flex-row'>             
                 <button 
                     className='p-1.5 text-white text-xl transition bg-blue-400 border-2 border-blue-400 rounded-full shadow-sm hover:bg-blue-300 hover:border-blue-300'
                     onClick={handleUpdate}
@@ -76,16 +60,9 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
                 </button>
                 <button 
                     className='p-1.5 text-white text-xl transition bg-red-500 border-2 border-red-500 rounded-full shadow-sm hover:text-red-500 hover:bg-white disabled:brightness-200'
-                    onClick={handleDelete}
-                    disabled={isLoading}
+                    onClick={handleDeleteModal}
                 >
-                    {
-                        isLoading ? (
-                            <AiOutlineLoading3Quarters className='text-white text-md animate-spin' />   
-                        ) : (
-                            <MdDeleteOutline />
-                        )
-                    }
+                    <MdDeleteOutline />
                 </button>
             </div>
         )        

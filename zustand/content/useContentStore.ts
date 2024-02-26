@@ -18,6 +18,10 @@ const useContentStore = createWithEqualityFn<UseContentStoreType>()(
             teacher: '',
             setTeacher: (value: string) => set(() => ({ teacher: value }), false, 'SET_TEACHER'),
 
+            price: 10000,
+            setPrice: (price: number) => set(() => ({ price }), false, 'SET_PRICE'),
+            setFree: () => set(() => ({ price: 0 }), false, 'SET_FREE'),
+
             getIsFormWritten: () => {
                 const curState = get();
                 return curState.title !== '' || curState.text !== '' || curState.selectedSubject !== '' || curState.teacher !== '';

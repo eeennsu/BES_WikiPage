@@ -19,7 +19,7 @@ const UserRegister: FC = () => {
             setLogout();
             toast.info('로그아웃하였습니다.');
         } else {
-            openModal(<UserLoginForm />);
+            openModal(<UserLoginForm />, 'max-w-max');
         }
     }
 

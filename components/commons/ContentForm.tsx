@@ -34,13 +34,16 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
         text, setText,
         selectedSubject, setSelectedSubject,
         teacher, setTeacher,
+        price, setPrice
     } = useContentStore(state => ({
         title: state.title, setTitle: state.setTitle,
         text: state.text, setText: state.setText,
         selectedSubject: state.selectedSubject, setSelectedSubject: state.setSelectedSubject,
         teacher: state.teacher, setTeacher: state.setTeacher,
+        price: state.price, setPrice: state.setPrice
     }), shallow);
 
+    const [isFree, setIsFree] = useState<boolean>(false);
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -65,6 +68,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     text,
                     subject: selectedSubject,
                     teacher,
+                    price: price || undefined,
                     pathname,
                     userId
                 });
@@ -79,6 +83,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     text,
                     subject: selectedSubject,
                     teacher,
+                    price: price || undefined,
                     pathname
                 });
 
@@ -87,7 +92,11 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
             
         } catch (error) {
             console.log(error);
-            toast.error('새 콘텐츠 추가에 실패하였습니다');
+            if (type === 'CREATE') {
+                toast.error('새 콘텐츠 추가에 실패하였습니다');
+            } else {
+                toast.error('콘텐츠 수정에 실패하였습니다');
+            }
         } finally {
             setIsSubmiting(false);
             closeModal();        
@@ -95,130 +104,191 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
     }
 
     return (
-        <form 
-            className='grid w-full gap-1 py-1 sm:gap-4 md:py-6' 
-            onSubmit={handleSubmit}
-        >
-            <div className='flex flex-col w-full space-y-1'>
-                <label htmlFor='title'>
-                    제목
-                </label>
-                <input 
-                    id='title' 
-                    className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
-                    placeholder='제목을 입력해주세요' 
-                    value={title} 
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-            </div>
-
-            <div className='flex flex-col mt-4 space-y-1'>
-                <label htmlFor='text'>
-                    내용
-                </label>
-                <textarea 
-                    id='text'
-                    className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll' 
-                    rows={6} 
-                    placeholder='글을 입력해주세요' 
-                    value={text} 
-                    onChange={(e) => setText(e.target.value)}
-                />
-            </div>
-            
-            <div className='flex flex-col items-center gap-6 mt-4 sm:flex-row'>
-                <div className='relative flex flex-col items-start w-full space-y-1'>
-                    <Listbox 
-                        value={selectedSubject} 
-                        onChange={setSelectedSubject}                    
-                    >
-                        <Listbox.Label htmlFor='subject'>
-                            주제
-                        </Listbox.Label>
-                        
-                        <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
-                            {selectedSubject}                    
-                        </Listbox.Button>
-
-                        <Transition
-                            enter='transition duration-100 ease-out'
-                            enterFrom='transform scale-95 opacity-0'
-                            enterTo='transform scale-100 opacity-100'
-                            leave='transition duration-75 ease-out'
-                            leaveFrom='transform scale-100 opacity-100'
-                            leaveTo='transform scale-95 opacity-0'
-                            className='absolute w-full top-16'
-                        >
-                            <Listbox.Options 
-                                id='subject' 
-                                className='w-full overflow-y-auto rounded-md shadow-sm min-w-20 max-h-[200px] custom-scroll'
-                            >
-                                {
-                                    selectSubjects.map((subject) => (
-                                        <Listbox.Option                                    
-                                            key={subject}
-                                            value={subject}     
-                                            as={Fragment}     
-                                        >
-                                            {
-                                                ({ active, selected }) => (
-                                                    <li className={`flex items-center gap-1 p-2 cursor-pointer shadow-md ${
-                                                        active ? 'bg-blue-400 text-white pl-3' : 'pl-3 bg-white text-black'
-                                                    }`}>
-                                                        {selected && <MdCheckCircleOutline />}
-                                                        {subject}
-                                                    </li>
-                                                )
-                                            }
-                                        </Listbox.Option>
-                                    ))
-                                }
-                            </Listbox.Options>
-                        </Transition>
-                    </Listbox>                
-                </div>        
-
+       <>
+            <h3 className='hidden p-3 text-2xl font-semibold leading-6 tracking-wider text-center text-gray-900 sm:block'> 
+                {
+                    type === 'CREATE' ? (
+                        '강의 추가하기'
+                    ) : (
+                        '강의 수정하기'
+                    )
+                }
+            </h3>
+            <form 
+                className='grid w-full gap-1 py-1 sm:gap-4 sm:py-3' 
+                onSubmit={handleSubmit}
+            >
                 <div className='flex flex-col w-full space-y-1'>
-                    <label htmlFor='teacher'>
-                        강사
+                    <label 
+                        htmlFor='title'
+                        className='font-semibold'
+                    >
+                        제목
                     </label>
                     <input 
-                        id='teacher' 
+                        id='title' 
                         className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
-                        placeholder='강사를 입력해주세요' 
-                        value={teacher} 
-                        onChange={(e) => setTeacher(e.target.value)}
+                        placeholder='제목을 입력해주세요' 
+                        value={title} 
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
-            </div>
 
-            <div className='flex justify-center gap-5 mt-4'>
-                <ButtonContent 
-                    className='w-[88px]'
-                    type='submit'
-                    disabled={isSubmiting}
-                >
-                    {
-                        isSubmiting ? (
-                            <AiOutlineLoading3Quarters className='text-xl text-white animate-spin' />     
-                        ) : (
-                            type === 'CREATE' 
-                            ? '추가하기'
-                            : '수정하기'
-                        )
-                    }
-                </ButtonContent>
-        
-                <ButtonContent 
-                    type='button'
-                    onClick={closeModal} 
-                    color='RED'
-                    disabled={isSubmiting}
-                >
-                    뒤로가기
-                </ButtonContent>         
-            </div>   
-        </form>
+                <div className='flex flex-col mt-4 space-y-1'>
+                    <label 
+                        htmlFor='text'
+                        className='font-semibold'
+                    >
+                        내용
+                    </label>
+                    <textarea 
+                        id='text'
+                        className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll' 
+                        rows={6} 
+                        placeholder='글을 입력해주세요' 
+                        value={text} 
+                        onChange={(e) => setText(e.target.value)}
+                    />
+                </div>
+                
+                <div className='flex flex-col items-center gap-6 mt-4 sm:flex-row'>
+                    <div className='relative flex flex-col items-start w-full space-y-1'>
+                        <Listbox 
+                            value={selectedSubject} 
+                            onChange={setSelectedSubject}                    
+                        >
+                            <Listbox.Label 
+                                htmlFor='subject' 
+                                className='font-semibold'
+                            >
+                                주제
+                            </Listbox.Label>
+                            
+                            <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
+                                {selectedSubject}                    
+                            </Listbox.Button>
+
+                            <Transition
+                                enter='transition duration-100 ease-out'
+                                enterFrom='transform scale-95 opacity-0'
+                                enterTo='transform scale-100 opacity-100'
+                                leave='transition duration-75 ease-out'
+                                leaveFrom='transform scale-100 opacity-100'
+                                leaveTo='transform scale-95 opacity-0'
+                                className='absolute w-full top-16'
+                            >
+                                <Listbox.Options 
+                                    id='subject' 
+                                    className='w-full overflow-y-auto rounded-md shadow-sm min-w-20 max-h-[200px] custom-scroll'
+                                >
+                                    {
+                                        selectSubjects.map((subject) => (
+                                            <Listbox.Option                                    
+                                                key={subject}
+                                                value={subject}     
+                                                as={Fragment}     
+                                            >
+                                                {
+                                                    ({ active, selected }) => (
+                                                        <li className={`flex items-center gap-1 p-2 cursor-pointer shadow-md ${
+                                                            active ? 'bg-blue-400 text-white pl-3' : 'pl-3 bg-slate-100 text-black'
+                                                        }`}>
+                                                            {selected && <MdCheckCircleOutline />}
+                                                            {subject}
+                                                        </li>
+                                                    )
+                                                }
+                                            </Listbox.Option>
+                                        ))
+                                    }
+                                </Listbox.Options>
+                            </Transition>
+                        </Listbox>                
+                    </div>        
+
+                    <div className='flex flex-col w-full space-y-1'>
+                        <label 
+                            htmlFor='teacher'
+                            className='font-semibold'
+                        >
+                            강사
+                        </label>
+                        <input 
+                            id='teacher' 
+                            className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
+                            placeholder='강사를 입력해주세요' 
+                            value={teacher} 
+                            onChange={(e) => setTeacher(e.target.value)}
+                        />
+                    </div>
+
+                    <div className='flex flex-col w-full space-y-1'>
+                        <div className='flex items-center justify-between'>
+                            <label 
+                                htmlFor='price' 
+                                className='font-semibold'
+                            >
+                                가격                           
+                            </label>
+                            <div className='flex items-center gap-1'>
+                                <label 
+                                    htmlFor='free'
+                                    className='ml-3 text-xs'
+                                >
+                                    무료
+                                </label>
+                                <input 
+                                    id='free'
+                                    type='checkbox'
+                                    checked={isFree}
+                                    onChange={(e) => {
+                                        setIsFree(prev => !prev);
+                                        e.target.checked && setPrice(0);
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <input 
+                            id='price' 
+                            className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none disabled:opacity-45' 
+                            type='number'
+                            placeholder='가격을 입력해주세요' 
+                            value={price} 
+                            defaultValue=''
+                            disabled={isFree}
+                            onChange={(e) => setPrice(e.target.valueAsNumber)}
+                        />
+                    </div>
+                </div>
+
+                <div className='flex justify-center gap-5 mt-4 sm:justify-end'>
+                    <ButtonContent 
+                        className='w-[88px]'
+                        type='submit'
+                        disabled={isSubmiting}
+                    >
+                        {
+                            isSubmiting ? (
+                                <AiOutlineLoading3Quarters className='text-xl text-white animate-spin' />     
+                            ) : (
+                                type === 'CREATE' 
+                                ? '추가하기'
+                                : '수정하기'
+                            )
+                        }
+                    </ButtonContent>
+            
+                    <ButtonContent 
+                        type='button'
+                        onClick={closeModal} 
+                        color='GRAY'
+                        disabled={isSubmiting}
+                    >
+                        뒤로가기
+                    </ButtonContent>         
+                </div>   
+            </form>
+       </>
     );
 }
 

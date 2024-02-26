@@ -22,7 +22,7 @@ const Footer: FC = () => {
                     </div>
                 </div>               
                 
-                <div className='flex flex-col items-center justify-center gap-4'>
+                <nav className='flex flex-col items-center justify-center gap-4'>
                     <ul className='flex text-xl gap-7 sm:gap-5'>
                         {
                             snsLinks.map((sns) => (
@@ -44,7 +44,7 @@ const Footer: FC = () => {
                             ))
                         }
                     </ul>            
-                </div>           
+                </nav>           
             </div>           
         </footer>
     );

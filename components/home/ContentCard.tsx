@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { priceFormat } from '@/lib/utils/util.format';
+import { beforTimeFormat, priceFormat } from '@/lib/utils/util.format';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ContentCard: FC<Props> = ({ content }) => {
-
+   
     return (    
         <div className='relative flex flex-col items-center bg-white rounded-md rounded-t-lg drop-shadow-md group'>        
             <figure className='relative w-full h-[140px] overflow-hidden'>
@@ -34,19 +34,23 @@ const ContentCard: FC<Props> = ({ content }) => {
                             {content.teacher}
                         </p>
 
-                        <p className='mt-1 font-bold text-blue-600'>
+                        <div className='flex items-end justify-between mt-1 font-bold'>
                             {
                                 content?.price ? (
-                                    <span className='tracking-wider'>
+                                    <p className='tracking-wider text-blue-600'>
                                         &#8361;&nbsp;{priceFormat(content.price)}
-                                    </span>
+                                    </p>
                                 ) : (
-                                    <span className='text-orange-400'>
+                                    <p className='text-orange-400'>
                                         무료
-                                    </span>
+                                    </p>
                                 )
                             }
-                        </p>
+
+                            <p className='hidden pr-1 text-xs italic text-gray-500 group-hover:block'>
+                                {beforTimeFormat(content.createdAt)}
+                            </p>
+                        </div>
                     </div>
                     
                     <p className='mt-3 overflow-hidden font-light leading-4 text-gray-600 line-clamp-4 text-xxs'>

@@ -11,6 +11,7 @@ export const createNewContent = async ({
     text,
     subject,
     teacher,
+    price,
     pathname,
 }: {
     userId: string;
@@ -18,18 +19,28 @@ export const createNewContent = async ({
     text: string;
     subject: string;
     teacher: string;
+    price?: number,
     pathname: string;
 }) => {
     try {
         connectToDB();
 
-        const content = await ContentModel.create({
+        let query: Record<string, number | string> = {
             author: userId,
             title,
             text,
             subject,
-            teacher
-        });
+            teacher,
+        };
+
+        if (price) {
+            query = {
+                ...query,
+                price
+            };
+        }   
+
+        const content = await ContentModel.create(query);
 
         if (!content) {
             throw new Error('Failed to create new content');
@@ -53,6 +64,7 @@ export const updateContent = async ({
     text,
     subject,
     teacher,
+    price,
     pathname
 }: {
     contentId: string;
@@ -60,6 +72,7 @@ export const updateContent = async ({
     text: string;
     subject: string;
     teacher: string;
+    price?: number;
     pathname: string;
 }) => {
     try {
@@ -72,6 +85,12 @@ export const updateContent = async ({
         exists.subject = subject;
         exists.teacher = teacher;
 
+        if (price) {
+            exists.price = price;
+        } else {
+            exists.unset('price');
+        }
+    
         await exists.save();
 
         revalidatePath(pathname);           // 수정후 경로 재검증 (데이터 업데이트)
@@ -93,7 +112,7 @@ export const getContents = async (curPage: number) => {
             .sort({ createdAt: 'desc' })
             .skip(skipAmount)
             .limit(pageSize)
-            .select(['title', 'text', 'subject', 'teacher', 'price']);
+            .select(['title', 'text', 'subject', 'teacher', 'price', 'createdAt']);
 
         const contents = (await query.exec()) as ContentCardInfo[];
         const totalContents = await ContentModel.countDocuments();
@@ -149,27 +168,43 @@ export const deleteOneContent = async (contentId: string) => {
 
 export const getRelatedContents = async ({
     contentId,
-    subject
-} : {
+    subject,
+    teacher
+}: {
     contentId: string;
-    subject: string;
+    subject?: string;
+    teacher?: string;
 }) => {
     try {
         connectToDB();
 
-        const relatedContents = await ContentModel
-            .find({ 
+        let query;
+
+        if (subject) {
+            query = { 
                 _id: { $ne: contentId },
                 subject
-            })
-            .select(['title', 'teacher'])
-            .limit(10);
+            };
+
+        } else {            
+            query = { 
+                _id: { $ne: contentId },
+                teacher
+            }        
+        }    
+        
+        const relatedContents = (await ContentModel.find(query).select(['title', 'price']).limit(8)) as RelatedContentCardInfo[];
+        const allContents = await ContentModel.countDocuments(query);
+        const otherCount = allContents - relatedContents.length;
         
         if (!relatedContents) {
             return null;
         } 
 
-        return relatedContents as Content[];
+        return {
+            relatedContents,
+            otherCount: otherCount > 0 ? otherCount : null
+        } ;
 
     } catch (error) {
         console.log(error);

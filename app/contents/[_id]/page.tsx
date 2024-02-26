@@ -16,21 +16,24 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
 
     if (!content) throw new Error('Not founded this content');
     
+    const contentId = content._id?.toString();
+
     return (
         <article className='w-full pb-10 mt-6 sm:mt-10'>
       
             <section className='flex items-center justify-between gap-4'>              
-                <h2 className='text-2xl font-semibold sm:text-xl break-keep'>
+                <h2 className='text-2xl font-semibold sm:text-xl'>
                     {content.title}
                 </h2>   
          
                  <ContentActions
-                    contentId={content._id.toString()}
+                    contentId={contentId}
                     authorId={content.author.toString()}
                     title={content.title}
                     text={content.text}
                     subject={content.subject}
                     teacher={content.teacher}
+                    price={content.price}
                 />
             </section>
 
@@ -39,9 +42,11 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                     <h3 className='font-bold'>                 
                         {content.teacher}
                     </h3>
-                    <span className='mx-4'>
+
+                    <span className='mx-4 font-bold'>
                         |
                     </span>
+                    
                     {
                         content?.price ? (
                             <p className='italic text-blue-500'>
@@ -64,7 +69,7 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
 
             <figure className='flex justify-center mt-8'>
                 <video 
-                    className='object-cover w-[780px] h-[450px] rounded-md drop-shadow-md'
+                    className='object-cover w-full h-full max-w-[780px] max-h-[450px] rounded-md drop-shadow-md'
                     controls 
                     preload='none'
                 >
@@ -89,11 +94,16 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                 </p>
             </section>
 
-            <hr className='my-10 border-t rounded-sm border-t-black' />
+            <hr className='mt-10 border-t rounded-sm border-t-black' />
             
             <RelatedContents
-                contentId={content._id.toString()}
+                contentId={contentId}
                 subject={content.subject}
+            />
+
+            <RelatedContents
+                contentId={contentId}
+                teacher={content.teacher}
             />
         </article>
     );

@@ -1,6 +1,5 @@
 import type { NextPage, Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
-import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Gothic_A1, Nanum_Gothic_Coding } from "next/font/google";
 import Footer from '@/components/rootLayout/footer/Footer';

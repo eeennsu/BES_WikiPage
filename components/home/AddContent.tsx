@@ -13,21 +13,21 @@ const AddContent: FC = () => {
     const isLogin = useUserStore(state => state.isLogin);
     
     const handleModalOpen = () => {
-        openModal(<ContentForm type='CREATE' />, 'max-w-3xl');
+        openModal(<ContentForm type='CREATE' />, 'max-w-4xl');
     }
 
     return isLogin && (
         <section className='relative'>
             {/* PC */}
-            <div className='absolute z-10 hidden sm:block -right-10 -top-10'>
+            <div className='absolute z-10 hidden lg:block -right-10 -top-10'>
                 <button onClick={handleModalOpen} className='flex flex-col items-center justify-center w-32 h-32 p-4 text-xl font-semibold text-white transition-colors border-white rounded-full shadow-xl outline-none bg-sky-400 hover:bg-sky-300'>
                     강의 추가
-                    <BiSolidBookAdd className='text-2xl'/>        
+                    <BiSolidBookAdd className='mt-1 text-2xl'/>        
                 </button>
             </div>
 
             {/* mobile */}
-            <div className='flex justify-center sm:hidden'>
+            <div className='flex justify-center lg:hidden'>
                 <ButtonLight onClick={handleModalOpen}>
                     강의 추가
                     <BiSolidBookAdd className='text-2xl'/>

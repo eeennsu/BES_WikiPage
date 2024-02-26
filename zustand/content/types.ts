@@ -11,6 +11,10 @@ export type UseContentStoreType = {
     teacher: string;
     setTeacher: (value: string) => void;
 
+    price: number,
+    setPrice: (price: number) => void;
+    setFree: () => void;
+
     getIsFormWritten: () => boolean;
     initForm: () => void;
 }

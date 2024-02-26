@@ -55,7 +55,7 @@ const UserLoginForm: FC = () => {
     }
 
     const formChange = () => {
-        openModal(<UserSignUpForm />, 'max-w-5xl');
+        openModal(<UserSignUpForm />);
     }
 
     return (

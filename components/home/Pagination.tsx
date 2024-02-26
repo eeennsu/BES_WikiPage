@@ -67,7 +67,7 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
             <button 
                 onClick={() => handleNavigation('PREV')} 
                 disabled={curPage === 1}
-                className={`${curPage === startPage && 'invisible'}`}
+                className='disabled:opacity-35'
             >
                 <RiArrowLeftSLine className='text-2xl' />
             </button>  
@@ -93,7 +93,7 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
             <button
                 onClick={() => handleNavigation('NEXT')}
                 disabled={curPage === totalPages}
-                className={`${curPage === endPage && 'invisible'}`}
+                className='disabled:opacity-35'
             >
                 <RiArrowRightSLine className='text-2xl' />
             </button>

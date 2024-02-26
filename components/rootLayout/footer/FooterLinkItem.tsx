@@ -10,7 +10,7 @@ const FooterLinkItem: FC<Props> = ({ link }) => {
 
     return (
         <li>
-            <Link href={link.url} className='text-xs font-semibold text-gray-700 hover:underline underline-offset-4'>
+            <Link href={link.url} className='text-xs font-semibold text-gray-700 whitespace-nowrap hover:underline underline-offset-4'>
                 {link.name}
             </Link>
         </li>

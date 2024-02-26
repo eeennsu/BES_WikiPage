@@ -21,7 +21,7 @@ export const generateMetadata = async ({ params: { _id } }: Props): Promise<Meta
 const Layout: NextPage<PropsWithChildren> = ({ children }) => {
 
     return (
-        <div className='flex justify-center w-full bg-gradient-to-b from-green-50 to-white'>
+        <div className='flex justify-center w-full bg-gradient-to-b from-sky-100/80 to-white'>
             <main className='flex flex-1 w-full h-full max-w-4xl px-6'>
                 {children}
             </main>           

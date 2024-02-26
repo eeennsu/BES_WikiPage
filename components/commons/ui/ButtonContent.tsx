@@ -5,14 +5,16 @@ type Props = {
     onClick?: () => void;
     disabled?: boolean;
     type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-    color?: 'BLUE' | 'RED';
+    color?: 'BLUE' | 'RED' | 'GRAY';
 }
 
 const ButtonContent: FC<PropsWithChildren<Props>> = ({ className, onClick, children, disabled, color = 'BLUE', type = 'button' }) => {
 
     const _color = color === 'BLUE' 
         ? 'bg-blue-500 hover:bg-blue-400 active:bg-blue-500/65 text-white'
-        : 'bg-red-400 hover:bg-red-500  active:bg-red-600 text-white'; 
+        : color === 'RED' 
+        ? 'bg-red-400 hover:bg-red-500 active:bg-red-600 text-white'
+        : 'bg-slate-600 hover:bg-slate-500 active:bg-slate-700 text-white'
 
     return (
         <button 
