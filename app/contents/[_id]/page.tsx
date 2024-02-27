@@ -69,7 +69,7 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
 
             <figure className='flex justify-center mt-8'>
                 <video 
-                    className='object-cover w-full h-full max-w-[780px] max-h-[450px] rounded-md drop-shadow-md'
+                    className='object-cover aspect-video w-full h-full rounded-md drop-shadow-md'
                     controls 
                     preload='none'
                 >

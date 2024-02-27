@@ -25,11 +25,11 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
     const {
         setTitle, setText,
         setSelectedSubject, setTeacher, 
-        setPrice
+        setPrice, setIsFree
     } = useContentStore(state => ({
         setTitle: state.setTitle, setText: state.setText,
         setSelectedSubject: state.setSelectedSubject, setTeacher: state.setTeacher,
-        setPrice: state.setPrice
+        setPrice: state.setPrice, setIsFree: state.setIsFree
     }), shallow);
 
     const curUserId = useUserStore(state => state.userInfo?._id);
@@ -42,6 +42,7 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
         setSelectedSubject(subject);
         setTeacher(teacher);
         setPrice(price || 0);
+        setIsFree(price === 0);
     }
 
     const handleDeleteModal = async () => {

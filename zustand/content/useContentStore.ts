@@ -20,7 +20,9 @@ const useContentStore = createWithEqualityFn<UseContentStoreType>()(
 
             price: 10000,
             setPrice: (price: number) => set(() => ({ price }), false, 'SET_PRICE'),
-            setFree: () => set(() => ({ price: 0 }), false, 'SET_FREE'),
+            
+            isFree: false,
+            setIsFree: (trigger: boolean) => set(() => ({ isFree: trigger }), false, 'SET_FREE'),
 
             getIsFormWritten: () => {
                 const curState = get();
@@ -32,6 +34,8 @@ const useContentStore = createWithEqualityFn<UseContentStoreType>()(
                 text: '',
                 selectedSubject: selectSubjects[0],
                 teacher: '',
+                price: 10000,
+                isFree: false,
             }), false, 'INIT_FORM')
         })
     )

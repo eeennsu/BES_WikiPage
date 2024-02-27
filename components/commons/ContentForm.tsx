@@ -34,22 +34,23 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
         text, setText,
         selectedSubject, setSelectedSubject,
         teacher, setTeacher,
-        price, setPrice
+        price, setPrice,
+        isFree, setIsFree
     } = useContentStore(state => ({
         title: state.title, setTitle: state.setTitle,
         text: state.text, setText: state.setText,
         selectedSubject: state.selectedSubject, setSelectedSubject: state.setSelectedSubject,
         teacher: state.teacher, setTeacher: state.setTeacher,
-        price: state.price, setPrice: state.setPrice
+        price: state.price, setPrice: state.setPrice,
+        isFree: state.isFree, setIsFree: state.setIsFree
     }), shallow);
 
-    const [isFree, setIsFree] = useState<boolean>(false);
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (title === '' || text === '' || selectedSubject === '' || teacher === '') {
+        if (title === '' || text === '' || selectedSubject === '' || teacher === '' || price.toString().length === 0) {
             toast.warning('강의 정보를 모두 입력해주세요');
             return;
         }
@@ -68,7 +69,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     text,
                     subject: selectedSubject,
                     teacher,
-                    price: price || undefined,
+                    price,
                     pathname,
                     userId
                 });
@@ -83,7 +84,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     text,
                     subject: selectedSubject,
                     teacher,
-                    price: price || undefined,
+                    price,
                     pathname
                 });
 
@@ -92,11 +93,13 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
             
         } catch (error) {
             console.log(error);
+
             if (type === 'CREATE') {
                 toast.error('새 콘텐츠 추가에 실패하였습니다');
             } else {
                 toast.error('콘텐츠 수정에 실패하였습니다');
             }
+
         } finally {
             setIsSubmiting(false);
             closeModal();        
@@ -241,8 +244,9 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                                     id='free'
                                     type='checkbox'
                                     checked={isFree}
+                                    defaultChecked={price === 0}
                                     onChange={(e) => {
-                                        setIsFree(prev => !prev);
+                                        setIsFree(!isFree);
                                         e.target.checked && setPrice(0);
                                     }}
                                 />

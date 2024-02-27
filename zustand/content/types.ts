@@ -13,7 +13,9 @@ export type UseContentStoreType = {
 
     price: number,
     setPrice: (price: number) => void;
-    setFree: () => void;
+
+    isFree: boolean;
+    setIsFree: (trigger: boolean) => void;
 
     getIsFormWritten: () => boolean;
     initForm: () => void;

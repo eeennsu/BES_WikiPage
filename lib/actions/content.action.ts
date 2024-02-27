@@ -19,28 +19,20 @@ export const createNewContent = async ({
     text: string;
     subject: string;
     teacher: string;
-    price?: number,
+    price: number,
     pathname: string;
 }) => {
     try {
         connectToDB();
 
-        let query: Record<string, number | string> = {
+        const content = await ContentModel.create({
             author: userId,
             title,
             text,
             subject,
             teacher,
-        };
-
-        if (price) {
-            query = {
-                ...query,
-                price
-            };
-        }   
-
-        const content = await ContentModel.create(query);
+            price,
+        });
 
         if (!content) {
             throw new Error('Failed to create new content');
@@ -72,7 +64,7 @@ export const updateContent = async ({
     text: string;
     subject: string;
     teacher: string;
-    price?: number;
+    price: number;
     pathname: string;
 }) => {
     try {
@@ -84,13 +76,8 @@ export const updateContent = async ({
         exists.text = text;
         exists.subject = subject;
         exists.teacher = teacher;
+        exists.price = price;
 
-        if (price) {
-            exists.price = price;
-        } else {
-            exists.unset('price');
-        }
-    
         await exists.save();
 
         revalidatePath(pathname);           // 수정후 경로 재검증 (데이터 업데이트)
