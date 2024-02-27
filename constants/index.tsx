@@ -47,7 +47,7 @@ export const footerLinks: FooterLink[] = [
 export type FooterInfo = {
     name: string;
     value: string;
-    icon: JSX.Element;
+    icon: React.ReactNode;
 }
 
 export const footerInfos: FooterInfo[] = [

@@ -20,7 +20,7 @@ const AddContent: FC = () => {
         <section className='relative'>
             {/* PC */}
             <div className='absolute z-10 hidden lg:block -right-10 -top-10'>
-                <button onClick={handleModalOpen} className='flex flex-col items-center justify-center w-32 h-32 p-4 text-xl font-semibold text-white transition-colors border-white rounded-full shadow-xl outline-none bg-sky-400 hover:bg-sky-300'>
+                <button onClick={handleModalOpen} className='flex flex-col items-center justify-center w-32 h-32 p-4 text-xl font-semibold text-white transition-colors border-white rounded-full shadow-xl outline-none dark:shadow-lg bg-sky-400 hover:bg-sky-300 dark:bg-slate-950 dark:font-normal dark:hover:bg-slate-900 dark:border-white'>
                     강의 추가
                     <BiSolidBookAdd className='mt-1 text-2xl'/>        
                 </button>

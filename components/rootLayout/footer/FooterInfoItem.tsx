@@ -15,7 +15,7 @@ const FooterInfoItem: FC<Props> = ({ info }) => {
                     {info.name} 
                 </span>
             </p>
-            <p className='text-xs font-semibold sm:col-span-3 md:col-span-4 max-lg:max-w-[270px]'>
+            <p className='text-xs font-semibold dark:font-normal sm:col-span-3 md:col-span-4 max-lg:max-w-[270px]'>
                 {info.value}
             </p>
         </div>

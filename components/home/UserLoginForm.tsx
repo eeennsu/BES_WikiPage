@@ -49,7 +49,8 @@ const UserLoginForm: FC = () => {
         } catch(err) {
             console.log(err);
             toast.error('알 수 없는 이유로 로그인에 실패하였습니다');
-        }finally {
+            
+        } finally {
             setIsSubmiting(false);
         }
     }

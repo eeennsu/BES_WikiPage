@@ -1,6 +1,6 @@
 import type { FC } from 'react';
-import Image from 'next/image';
 import { priceFormat } from '@/lib/utils/util.format';
+import Image from 'next/image';
 
 type Props = {
     title: string;
@@ -10,7 +10,7 @@ type Props = {
 const RelatedContentCard: FC<Props> = ({ title, price }) => {
 
     return (
-        <div className='flex flex-col items-center justify-start bg-white rounded-md rounded-t-md drop-shadow-md group'>        
+        <div className='flex flex-col items-center justify-start bg-white rounded-md dark:bg-gray-200 rounded-t-md drop-shadow-md group'>        
             <figure className='relative w-full h-[120px] overflow-hidden'>
                 <Image 
                     src={'https://picsum.photos/seed/picsum/200/120'}

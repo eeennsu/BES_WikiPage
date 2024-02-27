@@ -5,6 +5,7 @@ import ContentModel from '../models/Content.model';
 import UserModel from '../models/User.model';
 import { revalidatePath } from 'next/cache';
 
+// 새 콘텐츠 생성
 export const createNewContent = async ({ 
     userId,
     title,
@@ -50,6 +51,7 @@ export const createNewContent = async ({
     }
 }
 
+// 기존 콘텐츠 수정
 export const updateContent = async ({ 
     contentId,
     title,
@@ -88,6 +90,7 @@ export const updateContent = async ({
     }
 }
 
+// 페이지네이션을 함께한 콘텐츠 가져오기
 export const getContents = async (curPage: number) => {
     try {
         connectToDB();
@@ -106,7 +109,7 @@ export const getContents = async (curPage: number) => {
 
         const totalPages = Math.ceil(totalContents / pageSize);
         const hasNext = totalPages > skipAmount + contents.length;
-       
+
         return {
             contents,
             hasNext,
@@ -119,6 +122,7 @@ export const getContents = async (curPage: number) => {
     }
 }
 
+// 하나의 콘텐츠 정보 가져오기
 export const getDetailContent = async (contentId: string) => {
     try {
         connectToDB();
@@ -137,6 +141,7 @@ export const getDetailContent = async (contentId: string) => {
     }
 }
 
+// 하나의 콘텐츠 삭제하기
 export const deleteOneContent = async (contentId: string) => {
     try {
         connectToDB();
@@ -153,6 +158,7 @@ export const deleteOneContent = async (contentId: string) => {
     }
 }
 
+// 하나의 subject / teacher 을 기준으로 관련된 콘텐츠 불러오기
 export const getRelatedContents = async ({
     contentId,
     subject,

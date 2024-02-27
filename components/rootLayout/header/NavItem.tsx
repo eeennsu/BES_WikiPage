@@ -10,7 +10,7 @@ type Props = {
 const NavItem: FC<Props> = ({ nav }) => {
 
     return (
-        <li className='cursor-pointer' onClick={() => toast.info('Sorry, This page is not completed yet.')}>
+        <li className='cursor-pointer dark:!text-white dark:!font-normal dark:after:!bg-white' onClick={() => toast.info('Sorry, This page is not completed yet.')}>
             {nav}
         </li>
     );

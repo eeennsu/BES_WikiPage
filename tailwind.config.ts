@@ -9,10 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        glassmorphism: "rgba(255, 255, 255, 0.61)",
+        glassmorphism: 'rgba(255, 255, 255, 0.61)',
+        'glassmorphism-dark': 'rgba(1, 1, 1, 0.9)',
       },
       borderRadius: {
         '4xl': '32px',
+        '5xl': '40px'
       },
       fontSize: {
         'xxs': ['10px', '12px']

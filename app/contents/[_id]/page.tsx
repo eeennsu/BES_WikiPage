@@ -10,19 +10,18 @@ type Props = {
     };
 }
 
-const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
+const WikiPage: NextPage<Props> = async ({ params: { _id } }) => {
     
     const content = (await getDetailContent(_id)) as Content;
-
     if (!content) throw new Error('Not founded this content');
-    
+
     const contentId = content._id?.toString();
 
     return (
         <article className='w-full pb-10 mt-6 sm:mt-10'>
       
             <section className='flex items-center justify-between gap-4'>              
-                <h2 className='text-2xl font-semibold sm:text-xl'>
+                <h2 className='text-2xl font-semibold sm:text-xl dark:text-slate-100 dark:font-normal'>
                     {content.title}
                 </h2>   
          
@@ -37,9 +36,9 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                 />
             </section>
 
-            <section className='flex items-center justify-between mt-3.5 text-sm'>
+            <section className='flex items-center justify-between mt-3.5 text-sm dark:text-slate-100'>
                 <div className='flex'>
-                    <h3 className='font-bold'>                 
+                    <h3 className='font-bold dark:font-normal'>                 
                         {content.teacher}
                     </h3>
 
@@ -49,11 +48,11 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                     
                     {
                         content?.price ? (
-                            <p className='italic text-blue-500'>
+                            <p className='italic text-blue-500 dark:text-sky-400'>
                                 &#8361;&nbsp;{priceFormat(content.price)}
                             </p>
                         ) : (
-                            <p className='text-orange-400'>
+                            <p className='text-orange-400 dark:text-orange-300'>
                                 무료
                             </p>
                         )
@@ -69,7 +68,7 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
 
             <figure className='flex justify-center mt-8'>
                 <video 
-                    className='object-cover aspect-video w-full h-full rounded-md drop-shadow-md'
+                    className='object-cover w-full h-full rounded-md aspect-video drop-shadow-md'
                     controls 
                     preload='none'
                 >
@@ -84,12 +83,14 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
                         srcLang='en'
                         label='English'
                     />
-                    현재 브라우저는 video를 지원하지 않습니다.
+                    <span className='text-black dark:text-white'>
+                        현재 브라우저는 video를 지원하지 않습니다.
+                    </span>
                 </video>
             </figure>
 
             <section className='flex-1 w-full p-4 pb-0 mt-4 rounded-sm'>
-                <p className='text-sm leading-6'>
+                <p className='text-sm leading-6 dark:text-gray-100'>
                     {content.text} 
                 </p>
             </section>
@@ -109,4 +110,4 @@ const DetailContentPage: NextPage<Props> = async ({ params: { _id } }) => {
     );
 };
 
-export default DetailContentPage;
+export default WikiPage;

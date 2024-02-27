@@ -10,12 +10,12 @@ type Props = {
 const ContentCard: FC<Props> = ({ content }) => {
    
     return (    
-        <div className='relative flex flex-col items-center bg-white rounded-md rounded-t-lg drop-shadow-md group'>        
+        <div className='relative flex flex-col items-center bg-white rounded-t-lg rounded-b-sm drop-shadow-md group'>        
             <figure className='relative w-full h-[140px] overflow-hidden'>
                 <Image 
-                    src={'https://picsum.photos/seed/picsum/230/120'}
-                    alt={'thumbnail'}
-                    className='transition-all duration-300 shadow-md rounded-t-xl group-hover:brightness-50'
+                    src='https://picsum.photos/id/20/230/120'
+                    alt='thumbnail'
+                    className='transition-all duration-300 rounded-t-lg shadow-md group-hover:brightness-50'
                     fill
                 />                
             </figure>         
@@ -24,20 +24,20 @@ const ContentCard: FC<Props> = ({ content }) => {
                 href={`/contents/${content._id}`}                                           
                 className='text-xs font-semibold line-clamp-2 hover:underline underline-offset-4'
             > 
-                <div className='absolute left-0 right-0 h-[124px] p-[18px] text-black transition-all bg-white top-28 rounded-b-lg rounded-tl-4xl overflow-hidden group-hover:top-[42px] group-hover:h-[194px]'>
-                    <h4 className='h-8 line-clamp-2'>
+                <div className='absolute left-0 right-0 h-[124px] p-[18px] text-black transition-all ease-in-out bg-white dark:bg-slate-600 top-28 rounded-b-lg rounded-tl-5xl overflow-hidden group-hover:top-[42px] group-hover:h-[194px] duration-500'>
+                    <h4 className='h-8 line-clamp-2 dark:text-gray-200 dark:font-normal'>
                         {content.title}      
                     </h4>
 
                     <div className='mt-6 overflow-hidden text-xs'>
-                        <p className='text-gray-500'>
+                        <p className='tracking-wider text-gray-500 dark:text-white dark:font-normal'>
                             {content.teacher}
                         </p>
 
                         <div className='flex items-end justify-between mt-1 font-bold'>
                             {
                                 content?.price ? (
-                                    <p className='tracking-wider text-blue-600'>
+                                    <p className='tracking-wider text-blue-600 dark:text-cyan-300 dark:font-normal'>
                                         &#8361;&nbsp;{priceFormat(content.price)}
                                     </p>
                                 ) : (
@@ -47,13 +47,13 @@ const ContentCard: FC<Props> = ({ content }) => {
                                 )
                             }
 
-                            <p className='hidden pr-1 text-xs italic text-gray-500 group-hover:block'>
+                            <p className='hidden pr-1 text-xs italic text-gray-500 group-hover:block dark:text-gray-200 dark:font-normal'>
                                 {beforTimeFormat(content.createdAt)}
                             </p>
                         </div>
                     </div>
                     
-                    <p className='mt-3 overflow-hidden font-light leading-4 text-gray-600 line-clamp-4 text-xxs'>
+                    <p className='mt-3 overflow-hidden font-light leading-4 text-gray-600 line-clamp-4 text-xxs dark:text-gray-200'>
                         {content.text}
                     </p>
                 </div>    

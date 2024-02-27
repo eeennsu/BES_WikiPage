@@ -25,7 +25,7 @@ const UserRegister: FC = () => {
 
     return (
         <button 
-            className='flex items-center gap-2 text-sm font-semibold tracking-wider uppercase transition-colors bg-transparent rounded-md hover:text-blue-300'
+            className='flex items-center gap-2 text-sm font-semibold tracking-wider uppercase transition-colors bg-transparent rounded-md dark:text-gray-300/95 dark:hover:text-white dark:font-normal hover:text-blue-300'
             onClick={handleModalOpen}
         >
             {

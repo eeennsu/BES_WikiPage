@@ -5,6 +5,7 @@ import connectToDB from '../db/connectToDB';
 import UserModel from '../models/User.model';
 import bcrypt from 'bcrypt';
 
+// 유저 회원가입
 export const userSignUp = async ({
     email,
     password
@@ -18,11 +19,11 @@ export const userSignUp = async ({
         const exists = await UserModel.findOne({ email });
 
         if (exists) {
-            return false;           // 입력한 이메일이 이미 존재하면 회원가입 실패
+            return false;                           // 입력한 이메일이 이미 존재하면 회원가입 실패
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const salt = await bcrypt.genSalt(10);      
+        const hashedPassword = await bcrypt.hash(password, salt);       // 비밀번호를 암호화하여 저장
 
         const response = await UserModel.create({
             email,
@@ -37,6 +38,7 @@ export const userSignUp = async ({
     }
 }
 
+// 유저 로그인
 export const userLogin = async ({
     email,
     password

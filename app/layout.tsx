@@ -9,7 +9,7 @@ import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const gothicA1 = Gothic_A1({ weight: '400', subsets: ['latin'] });
-export const nanumGothic = Nanum_Gothic_Coding({ weight: '400', subsets: ['latin'] });
+export const nanumGothic = Nanum_Gothic_Coding({ weight: '700', subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Coding Hub',
@@ -24,7 +24,7 @@ const Layout: NextPage<PropsWithChildren> = ({ children }) => {
                 <div className='flex flex-col min-h-dvh'>                 
                     <Header />
 
-                    <div className='relative flex justify-center flex-1'>                                
+                    <div className='relative flex justify-center flex-1 dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-900'>                                
                         {children}            
                     </div>
 

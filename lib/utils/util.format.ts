@@ -1,3 +1,4 @@
+// UTC 날짜를 **년 **월 **일로 변환시켜주는 포맷함수
 export const dateFormat = (dateString: string) => {
     const date = new Date(dateString);
 
@@ -13,6 +14,7 @@ export const dateFormat = (dateString: string) => {
     return format;
 }
 
+// UTC 날짜를 *분 전, *주 전 등의 형태로 변환시켜주는 포맷함수
 export const beforTimeFormat = (dateString: string): string => {
     const startDate = new Date(dateString);
     const now = new Date();
@@ -49,6 +51,7 @@ export const beforTimeFormat = (dateString: string): string => {
     }
 }
 
+// 가격 세자릿수 콤마 포맷 함수
 export const priceFormat = (price: number | string) => {
     
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

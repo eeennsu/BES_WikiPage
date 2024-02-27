@@ -9,12 +9,12 @@ type Props = {
     }
 }
 
-const MainPage: NextPage<Props> = async ({ searchParams }) => {
+const LandingPage: NextPage<Props> = async ({ searchParams }) => {
 
     return (
         <main className='w-full max-w-5xl'>
             <div className='flex flex-col h-full pb-10 justify-center-d'>     
-                <div className='absolute inset-0 banner -z-50' />
+                <div className='absolute inset-0 banner -z-50 dark:hidden' />
                 
                 <Banner />
 
@@ -26,4 +26,4 @@ const MainPage: NextPage<Props> = async ({ searchParams }) => {
     );
 };
 
-export default MainPage;
+export default LandingPage;

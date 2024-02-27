@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { getRelatedContents  } from '@/lib/actions/content.action';
+import { getRelatedContents } from '@/lib/actions/content.action';
 import RelatedContentCard from './RelatedContentCard';
 import Link from 'next/link';
 
@@ -20,17 +20,17 @@ const RelatedContents: FC<Props> = async ({ contentId, subject, teacher }) => {
     return (
         <section className='mt-16'>
             <div className='flex items-center gap-3 text-lg'>
-                <h3 className='font-semibold'> 
-                    {subject || teacher} &nbsp;&nbsp; 관련 강의 
+                <h3 className='font-semibold dark:text-white dark:font-normal'> 
+                    {subject || teacher} &nbsp; 관련 강의 
                 </h3>
 
-                <p className='flex items-center gap-2 font-light text-blue-400'>
+                <p className='flex items-center gap-2 font-light text-blue-400 dark:text-sky-400'>
                     <span>
                         {response?.relatedContents.length}개
                     </span>
                     {
                         response?.otherCount && (
-                            <span className='text-sm italic font-light text-black'>
+                            <span className='text-sm italic font-light text-black dark:text-white'>
                                 ...  그외 {response?.otherCount}개
                             </span> 
                         )

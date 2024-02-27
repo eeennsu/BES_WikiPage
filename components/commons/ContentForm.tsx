@@ -130,7 +130,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     </label>
                     <input 
                         id='title' 
-                        className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
+                        className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none dark:bg-slate-200 dark:border-gray-400 dark:focus:border-black' 
                         placeholder='제목을 입력해주세요' 
                         value={title} 
                         onChange={(e) => setTitle(e.target.value)}
@@ -146,7 +146,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                     </label>
                     <textarea 
                         id='text'
-                        className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll' 
+                        className='px-2.5 py-1.5 text-sm border-2 bg-slate-100 focus:border-gray-400 rounded-md outline-none resize-none custom-scroll dark:bg-slate-200 dark:border-gray-400 dark:focus:border-black' 
                         rows={6} 
                         placeholder='글을 입력해주세요' 
                         value={text} 
@@ -167,7 +167,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                                 주제
                             </Listbox.Label>
                             
-                            <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 focus:border-gray-400 rounded-md outline-none w-full flex justify-start'>
+                            <Listbox.Button className='px-2.5 py-1.5 text-sm border-2 focus:border-gray-400 rounded-md outline-none w-full flex justify-start dark:bg-slate-200 dark:border-gray-400 dark:focus:border-black'>
                                 {selectedSubject}                    
                             </Listbox.Button>
 
@@ -218,7 +218,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         </label>
                         <input 
                             id='teacher' 
-                            className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none' 
+                            className='px-2.5 py-1.5 border-2 text-sm  bg-slate-100 focus:border-gray-400 rounded-md outline-none dark:bg-slate-20 dark:bg-slate-200 dark:border-gray-400 dark:focus:border-black' 
                             placeholder='강사를 입력해주세요' 
                             value={teacher} 
                             onChange={(e) => setTeacher(e.target.value)}
@@ -254,7 +254,7 @@ const ContentForm: FC<Props> = ({ type, contentId }) => {
                         </div>
                         <input 
                             id='price' 
-                            className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none disabled:opacity-45' 
+                            className='px-2.5 py-1.5 border-2 text-sm bg-slate-100 focus:border-gray-400 rounded-md outline-none disabled:opacity-45 dark:bg-slate-200 dark:border-gray-400 dark:focus:border-black' 
                             type='number'
                             placeholder='가격을 입력해주세요' 
                             value={price} 

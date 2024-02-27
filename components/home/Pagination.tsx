@@ -69,7 +69,7 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                 disabled={curPage === 1}
                 className='disabled:opacity-35'
             >
-                <RiArrowLeftSLine className='text-2xl' />
+                <RiArrowLeftSLine className='text-2xl dark:text-white' />
             </button>  
 
             <div className='flex gap-2 mx-4'>
@@ -78,10 +78,10 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                         <button 
                             key={page}
                             onClick={() => handlePage(page)}
-                            className={`flex items-center justify-center rounded-md px-3 py-1.5 ${
+                            className={`flex items-center justify-center w-10 h-10 rounded-full  ${
                                 page === curPage 
-                                ? 'bg-blue-500 text-white dark:bg-white dark:text-black'
-                                : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white active:bg-gray-200 dark:active:bg-gray-600'
+                                ? 'bg-sky-400 text-white dark:bg-white dark:text-black dark:font-semibold'
+                                : 'text-black hover:bg-gray-200 hover:border-gray-800 font-semibold hover:text-gray-700 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-300 dark:font-normal dark:hover:bg-gray-600 dark:hover:text-white active:bg-gray-200 dark:active:bg-gray-600'
                             }`}
                         >
                             {page}
@@ -95,7 +95,7 @@ const Pagination: FC<Props> = ({ curPage, totalPages }) => {
                 disabled={curPage === totalPages}
                 className='disabled:opacity-35'
             >
-                <RiArrowRightSLine className='text-2xl' />
+                <RiArrowRightSLine className='text-2xl dark:text-white' />
             </button>
         </>
     );

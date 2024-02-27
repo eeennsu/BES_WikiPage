@@ -14,7 +14,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-    }
+}
 
 .bg-article {
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
