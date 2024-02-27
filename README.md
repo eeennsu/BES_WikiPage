@@ -1,3 +1,10 @@
+<사용한 Tool>
+공통 - typescript
+front - next.js / tailwind-css / zustand / react-hook-form 
+back - mongoDB 
+
+===================================================================
+
 테스트를 위해 다음 계정으로 로그인할 수 있습니다.
 
 계정 1번:
