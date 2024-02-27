@@ -18,7 +18,7 @@ const WikiPage: NextPage<Props> = async ({ params: { _id } }) => {
     const contentId = content._id?.toString();
 
     return (
-        <article className='w-full pb-10 mt-6 sm:mt-10'>
+        <article className='w-full pb-16 sm:pb-24 pt-8 sm:pt-12'>
       
             <section className='flex items-center justify-between gap-4'>              
                 <h2 className='text-2xl font-semibold sm:text-xl dark:text-slate-100 dark:font-normal'>
@@ -64,7 +64,7 @@ const WikiPage: NextPage<Props> = async ({ params: { _id } }) => {
                 </p>
             </section>          
 
-            <hr className='mt-2 border-t rounded-sm border-t-black' />
+            <hr className='mt-2 border-t rounded-sm border-t-black dark:border-t-gray-400' />
 
             <figure className='flex justify-center mt-8'>
                 <video 
@@ -95,7 +95,7 @@ const WikiPage: NextPage<Props> = async ({ params: { _id } }) => {
                 </p>
             </section>
 
-            <hr className='mt-10 border-t rounded-sm border-t-black' />
+            <hr className='mt-10 border-t rounded-sm border-t-black dark:border-t-gray-400' />
             
             <RelatedContents
                 contentId={contentId}

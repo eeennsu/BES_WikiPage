@@ -1,7 +1,7 @@
 import type { NextPage, Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Gothic_A1, Nanum_Gothic_Coding } from "next/font/google";
+import { Gothic_A1, Nanum_Gothic_Coding } from 'next/font/google';
 import Footer from '@/components/rootLayout/footer/Footer';
 import Header from '@/components/rootLayout/header/Header';
 import Modal from '@/components/commons/ui/Modal';

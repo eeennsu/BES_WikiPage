@@ -48,7 +48,7 @@ const UserSignUpForm: FC = () => {
         } catch(err) {
             console.log(err);
             toast.error('알 수 없는 이유로 회원가입에 실패하였습니다');
-        }finally {
+        } finally {
             setIsSubmiting(false);
         }
     }

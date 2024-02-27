@@ -13,7 +13,7 @@ const RelatedContentCard: FC<Props> = ({ title, price }) => {
         <div className='flex flex-col items-center justify-start bg-white rounded-md dark:bg-gray-200 rounded-t-md drop-shadow-md group'>        
             <figure className='relative w-full h-[120px] overflow-hidden'>
                 <Image 
-                    src={'https://picsum.photos/seed/picsum/200/120'}
+                    src='https://picsum.photos/id/180/200/120'
                     alt='thumbnail'
                     className='transition duration-500 rounded-t-md  shadow-md group-hover:scale-[1.15]'
                     fill
