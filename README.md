@@ -20,10 +20,6 @@ deploy - vercel
   ID: test2@naver.com
   PW: 123123123
 
-회원가입
-테스트 이외의 다른 계정으로도 회원가입이 가능합니다. 사용자는 아래의 단계를 따라 회원가입할 수 있습니다.
-
-
 배포 링크 - https://bes-wiki-page.vercel.app/
 
 <이용 방법>
