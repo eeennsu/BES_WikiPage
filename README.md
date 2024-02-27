@@ -1,6 +1,9 @@
 <사용한 Tool>
+
 공통 - typescript
+
 front - next.js / tailwind-css / zustand / react-hook-form 
+
 back - mongoDB 
 
 ===================================================================
