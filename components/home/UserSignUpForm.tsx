@@ -10,10 +10,11 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import Button from '../commons/ui/Button';
+import UserLoginForm from './UserLoginForm';
 
 const UserSignUpForm: FC = () => {
 
-    const { closeModal } = useModal();
+    const { closeModal, openModal } = useModal();
 
     const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
@@ -39,7 +40,7 @@ const UserSignUpForm: FC = () => {
 
             if (response) {
                 toast.success('회원가입에 성공하였습니다');              
-                closeModal();
+                openModal(<UserLoginForm />, 'max-w-max');
             } else {
                 toast.error('이미 존재하는 아이디이거나 알 수 없는 이유로 회원가입에 실패하였습니다.');
             }
@@ -61,8 +62,7 @@ const UserSignUpForm: FC = () => {
                 className='mx-auto border rounded-lg shadow-sm min-w-[360px] mt-4' 
                 onSubmit={handleSubmit(handleSignUp)}
             >     
-                <div className='p-8'>
-                
+                <div className='p-8'>                
                     <div className='flex flex-col gap-8'>
                         <div className='space-y-1'>
                             <label
