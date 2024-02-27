@@ -8,7 +8,7 @@ type Props = {
 const FooterInfoItem: FC<Props> = ({ info }) => {
 
     return (
-        <div className='flex items-center sm:grid sm:grid-cols-4 md:grid-cols-5 max-lg:gap-4'>                                
+        <li className='flex items-center sm:grid sm:grid-cols-4 md:grid-cols-5 max-lg:gap-4'>                                
             <p className='flex gap-2.5 sm:col-span-1'>    
                 {info.icon}                                    
                 <span className='max-sm:hidden'>
@@ -18,7 +18,7 @@ const FooterInfoItem: FC<Props> = ({ info }) => {
             <p className='text-xs font-semibold dark:font-normal sm:col-span-3 md:col-span-4 max-lg:max-w-[270px] xl:whitespace-nowrap'>
                 {info.value}
             </p>
-        </div>
+        </li>
     );
 }
 

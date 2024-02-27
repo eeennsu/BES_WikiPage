@@ -16,7 +16,7 @@ export type UseContentStoreType = {
 
     isFree: boolean;
     setIsFree: (trigger: boolean) => void;
-
+    
     getIsFormWritten: () => boolean;
     initForm: () => void;
 }

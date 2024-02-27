@@ -13,8 +13,8 @@ export const generateMetadata = async ({ params: { _id } }: Props): Promise<Meta
     const content = await getDetailContent(_id);
 
     return {
-        title: `${content?.subject} 강의`,
-        description: `This page is ${content?.text} lecture. And created by ${content?.teacher}`,
+        title: `${content?.subject || '프로그래밍'} 강의`,
+        description: `This page is ${content?.title || 'programming'} lecture. And created by ${content?.teacher || 'unknown teacher.'}`,
     };
 }
 
