@@ -15,7 +15,11 @@ const Modal: FC = () => {
             as={Fragment}
             appear
         >
-            <Dialog as='div' className='relative z-10' onClose={closeModal}>
+            <Dialog 
+                as='div' 
+                className='relative z-10' 
+                onClose={closeModal}
+            >
                 <Transition.Child
                     as={Fragment}
                     enter='ease-out duration-300'
@@ -25,11 +29,14 @@ const Modal: FC = () => {
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'
                 >
-                    <div className='fixed inset-0 bg-black/55' onClick={closeModal} />
+                    <div 
+                        className='fixed inset-0 bg-black/55' 
+                        onClick={closeModal} 
+                    />
                 </Transition.Child>
                 
                 <div className='fixed inset-0 overflow-y-auto'>
-                    <div className='flex items-center justify-center min-h-full p-4'>
+                    <div className='flex items-center justify-center min-h-full'>
                         <Transition.Child
                             as={Fragment}
                             enter='ease-out duration-300'
@@ -39,7 +46,7 @@ const Modal: FC = () => {
                             leaveFrom='opacity-100 scale-100'
                             leaveTo='opacity-0 scale-95'
                         >
-                            <Dialog.Panel className={`w-full p-6 transition-all transform bg-white  rounded-lg shadow-md ${modalMaxWidth}`}>
+                            <Dialog.Panel className={`w-full p-6 max-sm:mx-3 transition-all transform bg-white rounded-lg shadow-md ${modalMaxWidth}`}>
                                 {modalContent}                                    
                             </Dialog.Panel>
                         </Transition.Child>

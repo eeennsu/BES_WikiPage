@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import useModal from '@/lib/hooks/useModal';
 import Button from '../commons/ui/Button';
 import UserLoginForm from './UserLoginForm';
+import UserFormContainer from './UserFormContainer';
 
 const UserSignUpForm: FC = () => {
 
@@ -28,6 +29,7 @@ const UserSignUpForm: FC = () => {
     });
 
     const handleSignUp = async () => {
+
         const { email, password } = getValues();
 
         setIsSubmiting(true);
@@ -55,14 +57,11 @@ const UserSignUpForm: FC = () => {
 
     return (
         <>
-            <h3 className='p-3 text-xl font-semibold leading-6 text-center text-gray-900'> 
-                Sign Up
-            </h3>
-            <form 
-                className='mx-auto border rounded-lg shadow-sm min-w-[360px] mt-4' 
-                onSubmit={handleSubmit(handleSignUp)}
-            >     
-                <div className='p-8'>                
+            <UserFormContainer
+                title='회원가입'
+                handleSubmit={handleSubmit(handleSignUp)}
+            >
+                <div className='p-6 sm:p-8'>                
                     <div className='flex flex-col gap-8'>
                         <div className='space-y-1'>
                             <label
@@ -135,9 +134,13 @@ const UserSignUpForm: FC = () => {
                             }    
                         </div>
 
-                        <div className='flex w-full gap-4'>
+                        <div className='flex w-full gap-4 sm:flex-row flex-col'>
                             <div className='flex-[0.7]'>
-                                <Button type='submit' disabled={isSubmiting}>
+                                <Button 
+                                    type='submit' 
+                                    disabled={isSubmiting}           
+                                    className='max-sm:text-xs'
+                                >
                                     {
                                         isSubmiting ? (
                                             <AiOutlineLoading3Quarters className='text-xl animate-spin' />                                        
@@ -145,11 +148,12 @@ const UserSignUpForm: FC = () => {
                                     }
                                 </Button>
                             </div>     
-                            <div className='flex-[0.3]'>
+                            <div className='flex-[0.3] hidden sm:block'>
                                 <Button 
                                     onClick={closeModal} 
                                     color='ORANGE'
                                     disabled={isSubmiting}
+                                    className='max-sm:text-xs'
                                 >
                                     뒤로가기
                                 </Button>
@@ -157,7 +161,7 @@ const UserSignUpForm: FC = () => {
                         </div>                 
                     </div>             
                 </div>
-            </form>
+            </UserFormContainer>
         </>
     );
 }
