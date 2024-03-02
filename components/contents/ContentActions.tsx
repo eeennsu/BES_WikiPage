@@ -16,7 +16,7 @@ type Props = {
     text: string;
     subject: string;
     teacher: string;
-    price?: number;
+    price: number;
 }
 
 const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, teacher, price }) => {
@@ -34,7 +34,7 @@ const ContentActions: FC<Props> = ({ contentId, authorId, title, text, subject, 
 
     const curUserId = useUserStore(state => state.userInfo?._id);
     const isAuhor = curUserId === authorId;
-
+ 
     const handleUpdate = () => {
         openModal(<ContentForm type='UPDATE' contentId={contentId} />, 'max-w-4xl');
         setTitle(title);

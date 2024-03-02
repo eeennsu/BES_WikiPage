@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ContentCard: FC<Props> = ({ content }) => {
-    
+   
     return (    
         <div className='relative flex flex-col items-center bg-white rounded-t-lg rounded-b-sm drop-shadow-md group'>        
             <figure className='relative w-full h-[140px] overflow-hidden'>
