@@ -47,8 +47,8 @@ const UserSignUpForm: FC = () => {
                 toast.error('이미 존재하는 아이디이거나 알 수 없는 이유로 회원가입에 실패하였습니다.');
             }
 
-        } catch(err) {
-            console.log(err);
+        } catch(error) {
+            console.log(error);
             toast.error('알 수 없는 이유로 회원가입에 실패하였습니다');
         } finally {
             setIsSubmiting(false);

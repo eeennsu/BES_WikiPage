@@ -47,8 +47,8 @@ const UserLoginForm: FC = () => {
                 toast.error('로그인에 실패하였습니다.');
             }
 
-        } catch(err) {
-            console.log(err);
+        } catch(error) {
+            console.log(error);
             toast.error('알 수 없는 이유로 로그인에 실패하였습니다');
             
         } finally {
