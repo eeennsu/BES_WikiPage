@@ -12,7 +12,7 @@ const MobileNav: FC = () => {
         <div className='relative block sm:hidden'>             
             <Menu as='div' className='relative inline-block text-left'>
                 <Menu.Button className='mt-1.5'>
-                    <HiMenuAlt2 className='flex items-center justify-center text-2xl dark:text-white' />
+                    <HiMenuAlt2 className='flex items-center justify-center text-xl dark:text-white' />
                 </Menu.Button>
                 
                 <Transition.Child

@@ -9,7 +9,7 @@ import MobileNav from './MobileNav';
 const Header: FC = () => {
 
     return (
-        <header className='sticky top-0 z-10 flex justify-center w-full h-20 shadow-md sm:shadow-sm bg-glassmorphism dark:bg-slate-600 dark:shadow-lg backdrop-blur-lg'>
+        <header className='sticky top-0 z-10 flex justify-center w-full h-[68px] sm:h-20 shadow-md sm:shadow-sm bg-glassmorphism dark:bg-slate-600 dark:shadow-lg backdrop-blur-lg'>
             <div className='flex items-center justify-between w-full px-10 max-w-7xl xl:max-w-[1260px]'>
                 <MobileNav /> 
 

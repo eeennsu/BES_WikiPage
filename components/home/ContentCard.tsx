@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ContentCard: FC<Props> = ({ content }) => {
-   
+    
     return (    
         <div className='relative flex flex-col items-center bg-white rounded-t-lg rounded-b-sm drop-shadow-md group'>        
             <figure className='relative w-full h-[140px] overflow-hidden'>
@@ -20,12 +20,9 @@ const ContentCard: FC<Props> = ({ content }) => {
                 />                
             </figure>         
 
-            <Link
-                href={`/contents/${content._id}`}                                           
-                className='text-xs font-semibold line-clamp-2 hover:underline underline-offset-4'
-            > 
+            <Link href={`/contents/${content._id}`}                                           > 
                 <div className='absolute left-0 right-0 h-[124px] p-[18px] text-black transition-all ease-in-out bg-white dark:bg-slate-600 top-28 rounded-b-lg rounded-tl-5xl overflow-hidden group-hover:top-[42px] group-hover:h-[194px] duration-500'>
-                    <h4 className='h-8 line-clamp-2 dark:text-gray-200 dark:font-normal'>
+                    <h4 className='h-8 dark:text-gray-200 dark:font-normal text-xs font-semibold line-clamp-2 hover:underline underline-offset-4'>
                         {content.title}      
                     </h4>
 
@@ -36,7 +33,7 @@ const ContentCard: FC<Props> = ({ content }) => {
 
                         <div className='flex items-end justify-between mt-1 font-bold'>
                             {
-                                content?.price ? (
+                                content.price !== 0 ? (
                                     <p className='tracking-wider text-blue-600 dark:text-cyan-300 dark:font-normal'>
                                         &#8361;&nbsp;{priceFormat(content.price)}
                                     </p>

@@ -32,7 +32,7 @@ const UserRegister: FC = () => {
                 !isLogin ? (
                     <>
                         <FiLogIn className='text-xl max-sm:hidden' />
-                        <FiUser className='text-2xl sm:hidden' />
+                        <FiUser className='text-xl sm:hidden' />
                         <span className='mt-0.5 max-sm:hidden'>
                             Login
                         </span>
