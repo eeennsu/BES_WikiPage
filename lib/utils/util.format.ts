@@ -41,7 +41,7 @@ export const beforTimeFormat = (dateString: string): string => {
         return `${days}일 전`;
 
     } else if (weeks < 4) {
-        return `${weeks} 주 전`;
+        return `${weeks}주 전`;
 
     } else if (months < 12) {
         return `${months}달 전`;

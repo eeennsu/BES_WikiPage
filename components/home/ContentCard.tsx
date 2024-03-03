@@ -22,7 +22,7 @@ const ContentCard: FC<Props> = ({ content }) => {
 
             <Link href={`/contents/${content._id}`}                                           > 
                 <div className='absolute left-0 right-0 h-[124px] p-[18px] text-black transition-all ease-in-out bg-white dark:bg-slate-600 top-28 rounded-b-lg rounded-tl-5xl overflow-hidden group-hover:top-[42px] group-hover:h-[194px] duration-500'>
-                    <h4 className='h-8 dark:text-gray-200 dark:font-normal text-xs font-semibold line-clamp-2 hover:underline underline-offset-4'>
+                    <h4 className='h-8 dark:text-gray-200 dark:font-normal text-xs font-semibold line-clamp-2 hover:underline underline-offset-[3px]'>
                         {content.title}      
                     </h4>
 
